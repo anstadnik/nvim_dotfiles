@@ -12,7 +12,7 @@ return {
          require('crates').setup { null_ls = { enabled = true, }, }
       end
    },
-   ['folke/trouble.nvim']= {
+   ['folke/trouble.nvim'] = {
       cmd = "TroubleToggle",
       config = function()
          require("trouble").setup {}
@@ -31,5 +31,19 @@ return {
    -- },
    ['nvim-treesitter/nvim-treesitter-textobjects'] = {
       after = "nvim-treesitter"
-   }
+   },
+   ['chaoren/vim-wordmotion'] = {},
+   ['rhysd/clever-f.vim'] = {},
+   ['tpope/vim-fugitive'] = {},
+   ['nvim-telescope/telescope-ui-select.nvim'] = {
+      after = 'telescope.nvim',
+      config = function()
+         require("telescope").load_extension("ui-select")
+      end
+   },
+
+   -- Override
+   ["nvim-telescope/telescope.nvim"] = {
+      event = "BufRead"
+   },
 }

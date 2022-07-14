@@ -10,14 +10,14 @@ M.ui = {
 
 M.options = {
    user = function()
-       require "custom.options"
+      require "custom.options"
    end,
 }
 
 local pluginConfs = require "custom.plugins.configs"
 
 M.plugins = {
-   -- remove = { "NvChad/nvterm" },
+   -- remove = { "lewis6991/gitsigns.nvim" },
    override = {
       ["nvim-treesitter/nvim-treesitter"] = pluginConfs.treesitter,
       ["hrsh7th/nvim-cmp"] = pluginConfs.nvimcmp,

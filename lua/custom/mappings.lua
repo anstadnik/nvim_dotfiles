@@ -24,12 +24,12 @@ M.disabled = {
 
 M.custom = {
    n = {
-      [";"] = {":", "Enter command mode", opts = { silent = false } },
-      [":"] = {";", "Next searched letter",  opts = { silent = false } },
+      [";"] = { ":", "Enter command mode", opts = { silent = false } },
+      [":"] = { ";", "Next searched letter", opts = { silent = false } },
    },
    v = {
-      [";"] = {":", "Enter command mode", opts = { silent = false } },
-      [":"] = {";", "Next searched letter",  opts = { silent = false } },
+      [";"] = { ":", "Enter command mode", opts = { silent = false } },
+      [":"] = { ";", "Next searched letter", opts = { silent = false } },
    },
    i = {
       ["jk"] = { "<ESC>", "Escape normal mode" },
@@ -46,7 +46,7 @@ M.telescope = {
 M.trouble = {
    n = {
       ["<leader>q"] = {
-        "<cmd>TroubleToggle workspace_diagnostics<cr>",
+         "<cmd>TroubleToggle workspace_diagnostics<cr>",
          "   diagnostic",
       },
    }
@@ -54,45 +54,45 @@ M.trouble = {
 
 M.navigator = {
    n = {
-      ["<C-h>"] = {"<CMD>lua require('Navigator').left()<CR>", "Seamless TMUX navigation"},
-      ["<C-k>"] = {"<CMD>lua require('Navigator').up()<CR>", "Seamless TMUX navigation"},
-      ["<C-l>"] = {"<CMD>lua require('Navigator').right()<CR>", "Seamless TMUX navigation"},
-      ["<C-j>"] = {"<CMD>lua require('Navigator').down()<CR>", "Seamless TMUX navigation"}
+      ["<C-h>"] = { "<CMD>lua require('Navigator').left()<CR>", "Seamless TMUX navigation" },
+      ["<C-k>"] = { "<CMD>lua require('Navigator').up()<CR>", "Seamless TMUX navigation" },
+      ["<C-l>"] = { "<CMD>lua require('Navigator').right()<CR>", "Seamless TMUX navigation" },
+      ["<C-j>"] = { "<CMD>lua require('Navigator').down()<CR>", "Seamless TMUX navigation" }
    }
 }
 
 M.easyalign = {
    n = {
-      ['ga'] = {'<plug>(EasyAlign)', "Align" },
+      ['ga'] = { '<plug>(EasyAlign)', "Align" },
    },
    x = {
-      ['ga'] = {'<plug>(EasyAlign)', "Align" }
+      ['ga'] = { '<plug>(EasyAlign)', "Align" }
    }
 }
 
 M.gitsigns = {
    n = {
       [']c'] = { function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() require("gitsigns").next_hunk() end)
-            return '<Ignore>'
-         end, { expr = true }
+         if vim.wo.diff then return ']c' end
+         vim.schedule(function() require("gitsigns").next_hunk() end)
+         return '<Ignore>'
+      end, { expr = true }
       },
       ['[c'] = { function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() require("gitsigns").prev_hunk() end)
-            return '<Ignore>'
-         end, { expr = true }
+         if vim.wo.diff then return '[c' end
+         vim.schedule(function() require("gitsigns").prev_hunk() end)
+         return '<Ignore>'
+      end, { expr = true }
       },
-      ['<leader>hS'] = {function() require('gitsigns').stage_buffer() end, "Git stage buffer" },
-      ['<leader>hu'] = {function() require('gitsigns').undo_stage_hunk() end, "Git stage buffer" },
-      ['<leader>hR'] = {function() require('gitsigns').reset_buffer() end, "Git stage buffer" },
-      ['<leader>hp'] = {function() require('gitsigns').preview_hunk() end, "Git stage buffer" },
-      ['<leader>hb'] = {function() require('gitsigns').blame_line { full = true }() end, "Git stage buffer" },
-      ['<leader>tb'] = {function() require('gitsigns').toggle_current_line_blame() end, "Git stage buffer" },
-      ['<leader>hd'] = {function() require('gitsigns').diffthis() end, "Git stage buffer" },
-      ['<leader>hD'] = {function() require('gitsigns').diffthis('~')() end, "Git stage buffer" },
-      ['<leader>td'] = {function() require('gitsigns').toggle_deleted() end, "Git stage buffer" },
+      ['<leader>hS'] = { function() require('gitsigns').stage_buffer() end, "Git stage buffer" },
+      ['<leader>hu'] = { function() require('gitsigns').undo_stage_hunk() end, "Git stage buffer" },
+      ['<leader>hR'] = { function() require('gitsigns').reset_buffer() end, "Git stage buffer" },
+      ['<leader>hp'] = { function() require('gitsigns').preview_hunk() end, "Git stage buffer" },
+      ['<leader>hb'] = { function() require('gitsigns').blame_line { full = true } () end, "Git stage buffer" },
+      ['<leader>tb'] = { function() require('gitsigns').toggle_current_line_blame() end, "Git stage buffer" },
+      ['<leader>hd'] = { function() require('gitsigns').diffthis() end, "Git stage buffer" },
+      ['<leader>hD'] = { function() require('gitsigns').diffthis('~')() end, "Git stage buffer" },
+      ['<leader>td'] = { function() require('gitsigns').toggle_deleted() end, "Git stage buffer" },
    }
 }
 
@@ -139,6 +139,14 @@ M.lspconfig = {
             vim.diagnostic.goto_next()
          end,
          "   goto_next",
+      },
+   },
+   v = {
+      ["<leader>ca"] = {
+         function()
+            vim.lsp.buf.range_code_action()
+         end,
+         "   lsp code_action",
       },
    }
 }

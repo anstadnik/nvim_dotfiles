@@ -6,8 +6,17 @@ M.setup_lsp = function(attach, capabilities)
    local on_attach = function(client, bufnr)
       attach(client, bufnr)
       -- require 'lsp_signature'.on_attach({ hint_enable = true });
-      client.server_capabilities.documentFormattingProvider = true
-      client.server_capabilities.documentRangeFormattingProvider = true
+      local vim_version = vim.version()
+
+      if vim_version.minor > 7 then
+         -- nightly
+         client.server_capabilities.documentFormattingProvider = true
+         client.server_capabilities.documentRangeFormattingProvider = true
+      else
+         -- stable
+         client.resolved_capabilities.document_formatting = true
+         client.resolved_capabilities.document_range_formatting = true
+      end
    end
 
    -- lspservers with default config
@@ -34,6 +43,6 @@ M.setup_lsp = function(attach, capabilities)
       },
    })
 
-   end
+end
 
-   return M
+return M
