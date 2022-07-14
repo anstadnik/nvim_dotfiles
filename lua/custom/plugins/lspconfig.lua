@@ -43,6 +43,25 @@ M.setup_lsp = function(attach, capabilities)
       },
    })
 
+   lspconfig["sourcery"].setup({
+      server = {
+         on_attach = on_attach,
+         capabilities = capabilities,
+         -- flags = { debounce_text_changes = 150 },
+         settings = {
+            ["rust-analyzer"] = {
+               checkOnSave = { command = "clippy" }
+            }
+         },
+      },
+      init_options = {
+         editor_version = 'vim',
+         extension_version = 'vim.lsp',
+         token = 'user_9IMPzM1nhVENfmTL5gZoD0KOh3_zFWPCHqjuHQs019beGcu1yi78i0TYBmM'
+      },
+   })
+
+
 end
 
 return M
