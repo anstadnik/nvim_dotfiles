@@ -12,6 +12,7 @@ M.disabled = {
       -- ["<A-i>"] = "",
       -- ["<A-h>"] = "",
       -- ["<A-v>"] = "",
+      ["<S-b>"] = "",
       ["<leader>h"] = "",
       ["<leader>v"] = "",
       ["<leader>rn"] = "",
@@ -63,10 +64,10 @@ M.navigator = {
 
 M.easyalign = {
    n = {
-      ['ga'] = { '<plug>(EasyAlign)', "Align" },
+      ['ga'] = { '<Plug>(EasyAlign)', "Align" },
    },
-   x = {
-      ['ga'] = { '<plug>(EasyAlign)', "Align" }
+   v = {
+      ['ga'] = { '<Plug>(EasyAlign)', "Align" }
    }
 }
 
@@ -122,12 +123,12 @@ M.lspconfig = {
          "<cmd> Telescope lsp_type_definitions<CR>",
          "   lsp definition type",
       },
-      ["<leader>r"] = {
-         function()
-            require("nvchad.ui.renamer").open()
-         end,
-         "   lsp rename",
-      },
+      -- ["<leader>r"] = {
+      --    function()
+      --       require("nvchad_ui.renamer").open()
+      --    end,
+      --    "   lsp rename",
+      -- },
       ["[d"] = {
          function()
             vim.diagnostic.goto_prev()
