@@ -47,6 +47,14 @@ return {
       require("lsp_lines").setup()
     end,
   },
+  ["tzachar/cmp-tabnine"] = {
+    run = './install.sh', after = 'nvim-cmp'
+  },
+  -- ["williamboman/mason-lspconfig.nvim"] = {
+  --   after = "williamboman/mason.nvim",
+  --   config = function()
+  --   end
+  -- },
 
   -- ["anstadnik/luasnip-latex-snippets.nvim"] = {
   --   -- ft = "tex",
@@ -62,5 +70,15 @@ return {
       require("plugins.configs.others").luasnip()
       require('luasnip.loaders.from_lua').lazy_load()
     end,
+  },
+  -- ["williamboman/mason.nvim"] = {
+  --   after = "nvim-lspconfig"
+  -- },
+  ["neovim/nvim-lspconfig"] = {
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.plugins.lspconfig"
+    end,
   }
+
 }

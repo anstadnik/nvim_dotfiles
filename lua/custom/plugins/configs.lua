@@ -79,6 +79,14 @@ M.nvimcmp = function()
           end
         end, { "i", "s" }),
       },
+      sources = {
+        { name = "luasnip" },
+        { name = "nvim_lsp" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "path" },
+        { name = "cmp_tabnine" }
+      },
     }
   end
 end

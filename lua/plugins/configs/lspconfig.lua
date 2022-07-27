@@ -15,12 +15,12 @@ local utils = require "core.utils"
 M.on_attach = function(client, bufnr)
   if vim.g.vim_version > 7 then
     -- nightly
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
+    client.server_capabilities.documentFormattingProvider = true
+    client.server_capabilities.documentRangeFormattingProvider = true
   else
     -- stable
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.resolved_capabilities.document_formatting = true
+    client.resolved_capabilities.document_range_formatting = true
   end
 
   local lsp_mappings = utils.load_config().mappings.lspconfig

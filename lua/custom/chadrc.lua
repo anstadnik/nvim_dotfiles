@@ -8,16 +8,13 @@ M.ui = {
   }
 }
 
-M.options = {
-  user = function()
-    require "custom.options"
-  end,
-}
-
 local pluginConfs = require "custom.plugins.configs"
 
 M.plugins = {
-  -- remove = { "lewis6991/gitsigns.nvim" },
+  remove = {
+    "NvChad/nvim-colorizer.lua",
+    -- "williamboman/mason.nvim"
+  },
   override = {
     ["nvim-treesitter/nvim-treesitter"] = pluginConfs.treesitter,
     ["hrsh7th/nvim-cmp"] = pluginConfs.nvimcmp,
@@ -27,12 +24,6 @@ M.plugins = {
     ["L3MON4D3/LuaSnip"] = pluginConfs.luasnip,
   },
   user = require "custom.plugins",
-  options = {
-    lspconfig = {
-      setup_lspconf = "custom.plugins.lspconfig",
-    },
-  },
-
 }
 
 M.mappings = require "custom.mappings"
