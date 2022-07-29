@@ -2,7 +2,7 @@ local M = {}
 
 M.ui = {
   theme_toggle = { "onenord", "one_light" },
-  theme = "onenord",
+  theme = "one_light",
   tabufline = {
     lazyload = false,
   }
@@ -13,7 +13,8 @@ local pluginConfs = require "custom.plugins.configs"
 M.plugins = {
   remove = {
     "NvChad/nvim-colorizer.lua",
-    -- "williamboman/mason.nvim"
+    "williamboman/mason.nvim",
+    -- "neovim/nvim-lspconfig"
   },
   override = {
     ["nvim-treesitter/nvim-treesitter"] = pluginConfs.treesitter,

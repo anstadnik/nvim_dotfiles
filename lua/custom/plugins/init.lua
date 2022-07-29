@@ -26,9 +26,6 @@ return {
   ['junegunn/vim-easy-align'] = {
     -- keys = "ga"
   },
-  -- ['ray-x/lsp_signature.nvim' ] = {
-  --    after = 'nvim-lspconfig'
-  -- },
   ['nvim-treesitter/nvim-treesitter-textobjects'] = {
     after = "nvim-treesitter"
   },
@@ -50,11 +47,15 @@ return {
   ["tzachar/cmp-tabnine"] = {
     run = './install.sh', after = 'nvim-cmp'
   },
-  -- ["williamboman/mason-lspconfig.nvim"] = {
-  --   after = "williamboman/mason.nvim",
-  --   config = function()
-  --   end
-  -- },
+  ["williamboman/mason-lspconfig.nvim"] = {
+    requires = "williamboman/mason.nvim",
+    after = "nvim-lspconfig",
+    config = function()
+      require("mason-lspconfig").setup({
+        automatic_installation = false,
+      })
+    end
+  },
 
   -- ["anstadnik/luasnip-latex-snippets.nvim"] = {
   --   -- ft = "tex",
@@ -71,14 +72,10 @@ return {
       require('luasnip.loaders.from_lua').lazy_load()
     end,
   },
-  -- ["williamboman/mason.nvim"] = {
-  --   after = "nvim-lspconfig"
-  -- },
   ["neovim/nvim-lspconfig"] = {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.plugins.lspconfig"
     end,
-  }
-
+  },
 }
