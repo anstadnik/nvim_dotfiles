@@ -49,11 +49,6 @@ lspconfig["sourcery"].setup({
     on_attach = on_attach,
     capabilities = capabilities,
     -- flags = { debounce_text_changes = 150 },
-    settings = {
-      ["rust-analyzer"] = {
-        checkOnSave = { command = "clippy" }
-      }
-    },
   },
   init_options = {
     editor_version = 'vim',
