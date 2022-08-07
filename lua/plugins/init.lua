@@ -3,7 +3,12 @@ vim.cmd "packadd packer.nvim"
 local plugins = {
 
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
-  ["wbthomason/packer.nvim"] = {},
+  ["wbthomason/packer.nvim"] = {
+    cmd = require("core.lazy_load").packer_cmds,
+    config = function()
+      require "plugins"
+    end,
+  },
   ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
 
   ["NvChad/base46"] = {
@@ -206,6 +211,9 @@ local plugins = {
       require("core.utils").load_mappings "whichkey"
     end,
   },
+
+  -- Speed up deffered plugins
+  ["lewis6991/impatient.nvim"] = { module = "impatient" },
 }
 
 require("core.packer").run(plugins)
