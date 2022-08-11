@@ -5,6 +5,7 @@ M.treesitter = {
     "rust",
     "python",
     "lua",
+    "comment"
   },
   textobjects = {
     select = {

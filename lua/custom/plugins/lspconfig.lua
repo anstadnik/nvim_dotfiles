@@ -1,18 +1,4 @@
-local on_attach = function(client, bufnr)
-  require("plugins.configs.lspconfig").on_attach(client, bufnr)
-  -- require 'lsp_signature'.on_attach({ hint_enable = true });
-  local vim_version = vim.version()
-
-  if vim_version.minor > 7 then
-    -- nightly
-    client.server_capabilities.documentFormattingProvider = true
-    client.server_capabilities.documentRangeFormattingProvider = true
-  else
-    -- stable
-    client.resolved_capabilities.document_formatting = true
-    client.resolved_capabilities.document_range_formatting = true
-  end
-end
+local on_attach = require("plugins.configs.lspconfig").on_attach
 
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
@@ -28,10 +14,16 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-require('rust-tools').setup({
+local rt = require("rust-tools")
+rt.setup({
   -- tools = { autoSetHints = false },
   server = {
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      require('core.utils').load_mappings("rust_tools", { buffer = bufnr })
+      -- Hover actions
+      -- vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
     capabilities = capabilities,
     standalone = true,
     -- flags = { debounce_text_changes = 150 },

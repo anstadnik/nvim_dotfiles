@@ -4,6 +4,19 @@ return {
     module = "rust-tools",
     -- [[ requires = { 'nvim-lua/plenary.nvim' }, ]]
   },
+  ['jose-elias-alvarez/null-ls.nvim'] = {
+    after = "nvim-lspconfig",
+    config = function ()
+require("null-ls").setup({
+  sources = {
+        require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.formatting.isort,
+        require("null-ls").builtins.formatting.stylua
+      }
+      })
+      end
+    ,
+  },
   ['Saecki/crates.nvim'] = {
     requires = { 'nvim-lua/plenary.nvim', 'jose-elias-alvarez/null-ls.nvim' },
     ft = "toml",
@@ -56,8 +69,9 @@ return {
     requires = "williamboman/mason.nvim",
     after = "nvim-lspconfig",
     config = function()
+      require("mason").setup()
       require("mason-lspconfig").setup({
-        automatic_installation = false,
+        automatic_installation = true,
       })
     end
   },
