@@ -86,19 +86,33 @@ return {
   -- },
   ["L3MON4D3/LuaSnip"] = {
     config = function()
-      require("plugins.configs.others").luasnip()
+      local present, luasnip = pcall(require, "luasnip")
+
+      if not present then
+        return
+      end
+
+      local options = {
+        history = true,
+        updateevents = "TextChanged,TextChangedI",
+        enable_autosnippets = true,
+      }
+
+      luasnip.config.set_config(options)
+      require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.luasnippets_path or "" }
       require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/luasnippets" }
 
       -- vim.keymap.set("i", "<CR>", function()
       --   require("luasnip").expand()
       -- end)
-      --
+
       vim.keymap.set("i", "<C-u>", function()
         if require("luasnip").choice_active() then
           require "luasnip.extras.select_choice"()
         end
       end)
-      --
+
       require("luasnip").config.setup {
         ext_opts = {
           [require("luasnip.util.types").choiceNode] = {
@@ -117,7 +131,9 @@ return {
       -- vim.api.nvim_create_autocmd("User", {
       --   pattern = "LuasnipChoiceNodeEnter",
       --   callback = function()
-      --     require "luasnip.extras.select_choice"()
+      --     if require("luasnip").choice_active() then
+      --       require "luasnip.extras.select_choice"()
+      --     end
       --     -- print(require("luasnip").session.event_node)
       --     -- print "hmm"
       --   end,

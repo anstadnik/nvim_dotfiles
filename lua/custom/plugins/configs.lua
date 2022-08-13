@@ -41,7 +41,6 @@ M.treesitter = {
 
 M.nvimcmp = function()
   local present, cmp = pcall(require, "cmp")
-  local ls = require "luasnip"
   if present then
     return {
       mapping = {
@@ -126,9 +125,9 @@ M.nvimtree = {
   },
 }
 
-M.luasnip = {
-  enable_autosnippets = true,
-}
+-- M.luasnip = {
+--   enable_autosnippets = true,
+-- }
 
 -- M.gitsigns = {
 --   on_attach = function(bufnr)
