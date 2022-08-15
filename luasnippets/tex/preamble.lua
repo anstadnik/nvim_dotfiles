@@ -212,19 +212,7 @@ snips = {
           "",
           "\\end{document}",
         },
-      }),
-      sn(nil, {
-        i(0),
-        t {
-          "}",
-          "",
-        },
-        i(1),
-        t {
-          "",
-          "\\end{document}",
-        },
-      }),
+      })
 
       -- sn(nil, {
       -- 	t {
@@ -543,36 +531,7 @@ snips = {
       -- }),
     }),
     { condition = pipe { on_top, conds.line_begin }, show_condition = on_top }
-  ),
-  s("a", {
-    c(1, {
-      t {
-        "hm",
-      },
-      sn(nil, {
-        i(0),
-        t {
-          "d",
-          "e",
-        },
-        i(1),
-        t {
-          "f",
-        },
-      }),
-      sn(nil, {
-        i(0),
-        t {
-          "a",
-          "b",
-        },
-        i(1),
-        t {
-          "c",
-        },
-      }),
-    }),
-  }),
+  )
 }
 
 return snips

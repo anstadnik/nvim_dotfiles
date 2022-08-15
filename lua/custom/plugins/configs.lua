@@ -6,6 +6,8 @@ M.treesitter = {
     "python",
     "lua",
     "comment",
+    "latex",
+    "bash"
   },
   textobjects = {
     select = {
