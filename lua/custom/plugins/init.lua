@@ -1,5 +1,9 @@
 return {
   ["machakann/vim-sandwich"] = { keys = { "sa", "sd", "sr" } },
+  ["kkoomen/vim-doge"] = {
+    keys = { "<leader>d" },
+    run = ":call doge#install()",
+  },
   ["will133/vim-dirdiff"] = {
     command = "DirDiff",
   },
@@ -81,9 +85,9 @@ return {
   },
 
   -- Override
-  -- ["nvim-telescope/telescope.nvim"] = {
-  --   event = "BufRead",
-  -- },
+  ["nvim-telescope/telescope.nvim"] = {
+    event = "BufRead",
+  },
   ["L3MON4D3/LuaSnip"] = {
     config = function()
       local present, luasnip = pcall(require, "luasnip")
@@ -128,16 +132,16 @@ return {
         },
       }
 
-      -- vim.api.nvim_create_autocmd("User", {
-      --   pattern = "LuasnipChoiceNodeEnter",
-      --   callback = function()
-      --     if require("luasnip").choice_active() then
-      --       require "luasnip.extras.select_choice"()
-      --     end
-      --     -- print(require("luasnip").session.event_node)
-      --     -- print "hmm"
-      --   end,
-      -- })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LuasnipChoiceNodeEnter",
+        callback = function()
+          if require("luasnip").choice_active() then
+            vim.schedule(require "luasnip.extras.select_choice")
+          end
+          -- print(require("luasnip").session.event_node)
+          -- print "hmm"
+        end,
+      })
     end,
   },
   ["neovim/nvim-lspconfig"] = {
