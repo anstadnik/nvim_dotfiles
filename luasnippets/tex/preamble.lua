@@ -134,7 +134,7 @@ snips = {
           "\\title{",
         },
         -- i(1, (((vim.api.nvim_buf_get_name(0):gsub(".tex", "")):gsub("_", " ")):gsub(".*/", ""))),
-        i(2),
+        i(1),
         t {
           "}",
           "\\usepackage{xwatermark}",
@@ -531,7 +531,7 @@ snips = {
       -- }),
     }),
     { condition = pipe { on_top, conds.line_begin }, show_condition = on_top }
-  )
+  ),
 }
 
 return snips

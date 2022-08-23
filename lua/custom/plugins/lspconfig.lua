@@ -1,8 +1,7 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 
--- local capabilities =
--- local capabilities = require("cmp_nvim_lsp").update_capabilities(require("plugins.configs.lspconfig").capabilities)
-local capabilities = require("plugins.configs.lspconfig").capabilities
+local capabilities = require("cmp_nvim_lsp").update_capabilities(require("plugins.configs.lspconfig").capabilities)
+-- local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 
@@ -61,42 +60,51 @@ lspconfig["sourcery"].setup {
 }
 
 lspconfig["texlab"].setup {
-  server = {
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      if vim.g.vim_version > 7 then
-        -- nightly
-        client.server_capabilities.documentFormattingProvider = true
-        client.server_capabilities.documentRangeFormattingProvider = true
-      else
-        -- stable
-        client.resolved_capabilities.document_formatting = true
-        client.resolved_capabilities.document_range_formatting = true
-      end
-      -- Hover actions
-      -- vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-    capabilities = capabilities,
-    -- flags = { debounce_text_changes = 150 },
-  },
+  -- server = {
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    if vim.g.vim_version > 7 then
+      -- nightly
+      client.server_capabilities.documentFormattingProvider = true
+      client.server_capabilities.documentRangeFormattingProvider = true
+    else
+      -- stable
+      client.resolved_capabilities.document_formatting = true
+      client.resolved_capabilities.document_range_formatting = true
+    end
+    -- Hover actions
+    -- vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
+  end,
+  capabilities = capabilities,
+  -- flags = { debounce_text_changes = 150 },
+  -- },
   settings = {
     texlab = {
-      -- auxDirectory = ".",
-      -- bibtexFormatter = "texlab",
-      -- build = {
-      --   args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-      --   executable = "latexmk",
-      --   forwardSearchAfter = false,
-      --   onSave = false,
-      -- },
-      -- diagnosticsDelay = 300,
-      -- formatterLineLength = 80,
+      auxDirectory = ".",
+      bibtexFormatter = "texlab",
+      build = {
+        -- args = { "-pdf", "-pdflatex=xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        -- executable = "latexmk",
+        executable = "tectonic",
+        args = {
+          "-X",
+          "compile",
+          "%f",
+          "--synctex",
+          "--keep-logs",
+          "--keep-intermediates",
+        },
+        forwardSearchAfter = true,
+        onSave = true,
+      },
+      diagnosticsDelay = 300,
+      formatterLineLength = 80,
       forwardSearch = {
         args = { "--synctex-forward", "%l:1:%f", "%p" },
         executable = "zathura",
       },
       chktex = { onOpenAndSave = true, onEdit = false },
-      -- latexFormatter = "latexindent",
+      latexFormatter = "latexindent",
       latexindent = {
         modifyLineBreaks = true,
       },

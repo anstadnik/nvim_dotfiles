@@ -25,9 +25,7 @@ return {
   },
   ["Saecki/crates.nvim"] = {
     requires = { "nvim-lua/plenary.nvim", "jose-elias-alvarez/null-ls.nvim" },
-    cond = function()
-      return vim.fn.expand "%:p" == "Cargo.toml"
-    end,
+    event = "BufEnter Cargo.toml",
     config = function()
       require "null-ls"
       require("crates").setup { null_ls = { enabled = true } }
