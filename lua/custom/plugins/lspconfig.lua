@@ -1,4 +1,16 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
+local on_attach_with_format = function(client, bufnr)
+  on_attach(client, bufnr)
+  if vim.g.vim_version > 7 then
+    -- nightly
+    client.server_capabilities.documentFormattingProvider = true
+    client.server_capabilities.documentRangeFormattingProvider = true
+  else
+    -- stable
+    client.resolved_capabilities.document_formatting = true
+    client.resolved_capabilities.document_range_formatting = true
+  end
+end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(require("plugins.configs.lspconfig").capabilities)
 -- local capabilities = require("plugins.configs.lspconfig").capabilities
@@ -15,21 +27,17 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+lspconfig["yamlls"].setup {
+  on_attach = on_attach_with_format,
+  capabilities = capabilities,
+}
+
 local rt = require "rust-tools"
 rt.setup {
   -- tools = { autoSetHints = false },
   server = {
     on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      if vim.g.vim_version > 7 then
-        -- nightly
-        client.server_capabilities.documentFormattingProvider = true
-        client.server_capabilities.documentRangeFormattingProvider = true
-      else
-        -- stable
-        client.resolved_capabilities.document_formatting = true
-        client.resolved_capabilities.document_range_formatting = true
-      end
+      on_attach_with_format(client, bufnr)
       require("core.utils").load_mappings("rust_tools", { buffer = bufnr })
       -- Hover actions
       -- vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
@@ -61,20 +69,7 @@ lspconfig["sourcery"].setup {
 
 lspconfig["texlab"].setup {
   -- server = {
-  on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
-    if vim.g.vim_version > 7 then
-      -- nightly
-      client.server_capabilities.documentFormattingProvider = true
-      client.server_capabilities.documentRangeFormattingProvider = true
-    else
-      -- stable
-      client.resolved_capabilities.document_formatting = true
-      client.resolved_capabilities.document_range_formatting = true
-    end
-    -- Hover actions
-    -- vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
-  end,
+  on_attach = on_attach_with_format,
   capabilities = capabilities,
   -- flags = { debounce_text_changes = 150 },
   -- },
