@@ -104,9 +104,13 @@ M.lspconfig = {
       "<cmd> Telescope lsp_definitions<CR>",
       "   lsp definition",
     },
-    ["<C-g>"] = {
+    ["<leader>g"] = {
       "<cmd> Telescope lsp_document_symbols<CR>",
       "   document symbols",
+    },
+    ["<C-g>"] = {
+      "<cmd> SymbolsOutline<CR>",
+      "   symbol outline",
     },
     ["gr"] = {
       "<cmd> Telescope lsp_references<CR>",

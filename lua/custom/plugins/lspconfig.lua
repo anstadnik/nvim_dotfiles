@@ -32,6 +32,11 @@ lspconfig["yamlls"].setup {
   capabilities = capabilities,
 }
 
+lspconfig["dockerls"].setup {
+  on_attach = on_attach_with_format,
+  capabilities = capabilities,
+}
+
 local rt = require "rust-tools"
 rt.setup {
   -- tools = { autoSetHints = false },

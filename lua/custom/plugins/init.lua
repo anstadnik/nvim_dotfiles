@@ -13,6 +13,7 @@ return {
   },
   ["jose-elias-alvarez/null-ls.nvim"] = {
     after = "nvim-lspconfig",
+    module = "null-ls",
     config = function()
       require("null-ls").setup {
         sources = {
@@ -145,6 +146,11 @@ return {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.plugins.lspconfig"
+    end,
+  },
+  ["simrat39/symbols-outline.nvim"] = {
+    config = function()
+      require("symbols-outline").setup()
     end,
   },
 }
