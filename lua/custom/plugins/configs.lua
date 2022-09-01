@@ -7,7 +7,7 @@ M.treesitter = {
     "lua",
     "comment",
     "latex",
-    "bash"
+    "bash",
   },
   textobjects = {
     select = {
@@ -35,10 +35,31 @@ M.treesitter = {
       enable = true,
       peek_definition_code = {
         ["<C-p>"] = "@function.outer",
-        -- ["<leader>dF"] = "@class.outer"
+        ["<leader>dF"] = "@class.outer",
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>a"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>A"] = "@parameter.inner",
       },
     },
   },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<leader>v",
+      node_incremental = "<leader>v",
+      scope_incremental = "<leader>s",
+      node_decremental = "<leader>m",
+    },
+  },
+  -- indent = {
+  --   enable = true,
+  -- },
 }
 
 M.nvimcmp = function()
@@ -46,7 +67,7 @@ M.nvimcmp = function()
   if present then
     return {
       mapping = {
-        ["<C-p>"] =cmp.mapping.select_prev_item(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
         -- function(fallback)
         --   -- print(ls.choice_active())
         --   if ls.choice_active() then
@@ -127,50 +148,61 @@ M.nvimtree = {
   },
 }
 
--- M.luasnip = {
---   enable_autosnippets = true,
--- }
+M.luasnip = {
+  enable_autosnippets = true,
+}
 
--- M.gitsigns = {
---   on_attach = function(bufnr)
---     local gs = package.loaded.gitsigns
---
---     local function map(mode, l, r, opts)
---       opts = opts or {}
---       opts.buffer = bufnr
---       vim.keymap.set(mode, l, r, opts)
---     end
---
---     -- Navigation
---     map('n', ']c', function()
---       if vim.wo.diff then return ']c' end
---       vim.schedule(function() gs.next_hunk() end)
---       return '<Ignore>'
---     end, { expr = true })
---
---     map('n', '[c', function()
---       if vim.wo.diff then return '[c' end
---       vim.schedule(function() gs.prev_hunk() end)
---       return '<Ignore>'
---     end, { expr = true })
---
---     -- Actions
---     map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
---     map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
---     map('n', '<leader>hS', gs.stage_buffer)
---     map('n', '<leader>hu', gs.undo_stage_hunk)
---     map('n', '<leader>hR', gs.reset_buffer)
---     map('n', '<leader>hp', gs.preview_hunk)
---     map('n', '<leader>hb', function() gs.blame_line { full = true } end)
---     map('n', '<leader>tb', gs.toggle_current_line_blame)
---     map('n', '<leader>hd', gs.diffthis)
---     map('n', '<leader>hD', function() gs.diffthis('~') end)
---     map('n', '<leader>td', gs.toggle_deleted)
---
---     -- Text object
---     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
---   end,
---
--- }
+M.gitsigns = {
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map("n", "]c", function()
+      if vim.wo.diff then
+        return "]c"
+      end
+      vim.schedule(function()
+        gs.next_hunk()
+      end)
+      return "<Ignore>"
+    end, { expr = true })
+
+    map("n", "[c", function()
+      if vim.wo.diff then
+        return "[c"
+      end
+      vim.schedule(function()
+        gs.prev_hunk()
+      end)
+      return "<Ignore>"
+    end, { expr = true })
+
+    -- Actions
+    map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+    map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+    map("n", "<leader>hS", gs.stage_buffer)
+    map("n", "<leader>hu", gs.undo_stage_hunk)
+    map("n", "<leader>hR", gs.reset_buffer)
+    map("n", "<leader>hp", gs.preview_hunk)
+    map("n", "<leader>hb", function()
+      gs.blame_line { full = true }
+    end)
+    map("n", "<leader>tb", gs.toggle_current_line_blame)
+    map("n", "<leader>hd", gs.diffthis)
+    map("n", "<leader>hD", function()
+      gs.diffthis "~"
+    end)
+    map("n", "<leader>td", gs.toggle_deleted)
+
+    -- Text object
+    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+  end,
+}
 
 return M
