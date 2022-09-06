@@ -11,6 +11,9 @@ return {
     module = "rust-tools",
     -- [[ requires = { 'nvim-lua/plenary.nvim' }, ]]
   },
+  -- ["akinsho/flutter-tools.nvim"] = {
+  --   module = "flutter-tools",
+  -- },
   ["jose-elias-alvarez/null-ls.nvim"] = {
     after = "nvim-lspconfig",
     module = "null-ls",
@@ -60,7 +63,7 @@ return {
   },
 
   ["Maan2003/lsp_lines.nvim"] = {
-    ft = { "rs", "py" },
+    ft = { "rust", "py" },
     config = function()
       require("lsp_lines").setup()
       -- Disable virtual_text since it's redundant due to lsp_lines.
@@ -101,20 +104,9 @@ return {
         return
       end
 
-      local options = {
-        history = true,
-        updateevents = "TextChanged,TextChangedI",
-        enable_autosnippets = true,
-      }
-
-      luasnip.config.set_config(options)
       require("luasnip.loaders.from_vscode").lazy_load()
       require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.luasnippets_path or "" }
       require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/luasnippets" }
-
-      -- vim.keymap.set("i", "<CR>", function()
-      --   require("luasnip").expand()
-      -- end)
 
       vim.keymap.set("i", "<C-u>", function()
         if require("luasnip").choice_active() then
@@ -135,6 +127,11 @@ return {
             },
           },
         },
+        history = true,
+        updateevents = "TextChanged,TextChangedI",
+        region_check_events = "CursorMoved,CursorHold,InsertEnter",
+        delete_check_events = "TextChanged",
+        enable_autosnippets = true,
       }
 
       vim.api.nvim_create_autocmd("User", {

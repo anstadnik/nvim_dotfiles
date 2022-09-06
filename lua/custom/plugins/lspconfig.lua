@@ -18,7 +18,7 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(require("plugin
 local lspconfig = require "lspconfig"
 
 -- lspservers with default config
-local servers = { "pyright", "dockerls", "bashls" }
+local servers = { "pyright", "bashls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -58,6 +58,54 @@ rt.setup {
     },
   },
 }
+
+
+-- -- alternatively you can override the default configs
+-- require("flutter-tools").setup {
+--   decorations = {
+--     statusline = {
+--       -- set to true to be able use the 'flutter_tools_decorations.app_version' in your statusline
+--       -- this will show the current version of the flutter app from the pubspec.yaml file
+--       app_version = true,
+--       -- set to true to be able use the 'flutter_tools_decorations.device' in your statusline
+--       -- this will show the currently running device if an application was started with a specific
+--       -- device
+--       device = true,
+--     }
+--   },
+--   -- debugger = { -- integrate with nvim dap + install dart code debugger
+--   --   enabled = true,
+--   --   run_via_dap = false, -- use dap instead of a plenary job to run flutter apps
+--   --   register_configurations = function(paths)
+--   --     require("dap").configurations.dart = {
+--   --       <put here config that you would find in .vscode/launch.json>
+--   --     }
+--   --   end,
+--   -- },
+--   -- flutter_path = "/usr/bin/dart",
+--   widget_guides = {
+--     enabled = true,
+--   },
+--   dev_tools = {
+--     autostart = true, -- autostart devtools server if not detected
+--     auto_open_browser = true, -- Automatically opens devtools in the browser
+--   },
+--   outline = {
+--     open_cmd = "30vnew", -- command to use to open the outline buffer
+--     auto_open = true -- if true this will open the outline automatically when it is first populated
+--   },
+--   lsp = {
+--     color = { -- show the derived colours for dart variables
+--       enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
+--       background = false, -- highlight the background
+--       foreground = false, -- highlight the foreground
+--       virtual_text = true, -- show the highlight using virtual text
+--       virtual_text_str = "■", -- the virtual text character to highlight
+--     },
+--     on_attach = on_attach,
+--     capabilities = capabilities, -- e.g. lsp_status capabilities
+--   }
+-- }
 
 lspconfig["sourcery"].setup {
   server = {

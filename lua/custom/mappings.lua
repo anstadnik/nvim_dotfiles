@@ -45,7 +45,7 @@ M.custom = {
 }
 
 M.telescope = {
-  plugin = true,
+  -- plugin = true,
 
   n = {
     ["<leader>n"] = { "<cmd> Telescope find_files <CR>", "  find files" },
@@ -54,7 +54,7 @@ M.telescope = {
 }
 
 M.trouble = {
-  plugin = true,
+  -- plugin = true,
   n = {
     ["<leader>q"] = {
       "<cmd>TroubleToggle workspace_diagnostics<cr>",
@@ -64,7 +64,7 @@ M.trouble = {
 }
 
 M.navigator = {
-  plugin = true,
+  -- plugin = true,
   n = {
     ["<C-h>"] = { "<CMD>lua require('Navigator').left()<CR>", "Seamless TMUX navigation" },
     ["<C-k>"] = { "<CMD>lua require('Navigator').up()<CR>", "Seamless TMUX navigation" },
@@ -74,7 +74,7 @@ M.navigator = {
 }
 
 M.easyalign = {
-  plugin = true,
+  -- plugin = true,
   n = {
     ["ga"] = { "<Plug>(EasyAlign)", "Align" },
   },
@@ -84,7 +84,7 @@ M.easyalign = {
 }
 
 M.gitsigns = {
-  plugin = true,
+  -- plugin = true,
   n = {
     ["]c"] = {
       function()
@@ -168,7 +168,7 @@ M.gitsigns = {
 }
 
 M.lspconfig = {
-  plugin = true,
+  -- plugin = true,
   n = {
     ["gd"] = {
       "<cmd> Telescope lsp_definitions<CR>",
@@ -198,6 +198,12 @@ M.lspconfig = {
       "<cmd> Telescope lsp_type_definitions<CR>",
       "   lsp definition type",
     },
+    ["<leader>fm"] = {
+      function()
+        vim.lsp.buf.format { async = true }
+      end,
+      "lsp formatting",
+    },
     -- ["<leader>r"] = {
     --    function()
     --       require("nvchad_ui.renamer").open()
@@ -220,7 +226,7 @@ M.lspconfig = {
   v = {
     ["<leader>ca"] = {
       function()
-        vim.lsp.buf.range_code_action()
+        vim.lsp.buf.code_action()
       end,
       "   lsp code_action",
     },
@@ -228,7 +234,7 @@ M.lspconfig = {
 }
 
 M.rust_tools = {
-  plugin = true,
+  -- plugin = true,
   n = {
     ["K"] = {
       function()
