@@ -16,6 +16,8 @@ M.treesitter = {
         -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
+        ["aa"] = "@parameter.outer",
+        ["ia"] = "@parameter.inner",
         ["aC"] = "@class.outer",
         ["iC"] = "@class.inner",
         ["ac"] = "@conditional.outer",
