@@ -1,6 +1,6 @@
 local path = vim.api.nvim_buf_get_name(0)
 
-if path:match('/home/astadnik/.leetcode/code/.*') then
+if path:match('/home/astadnik/code/.*') then
    local problem_id = path:match("[^/]*$"):match("%d*%."):sub(1, -2)
    vim.keymap.set('n', '<CR>', function()
       require("nvterm.terminal").send("leetcode test " .. problem_id, "horizontal")
