@@ -23,6 +23,7 @@ return {
           require("null-ls").builtins.formatting.black,
           require("null-ls").builtins.formatting.isort,
           require("null-ls").builtins.formatting.stylua,
+          require("null-ls").builtins.formatting.shfmt,
         },
       }
     end,
