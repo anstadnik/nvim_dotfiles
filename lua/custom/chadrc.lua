@@ -3,6 +3,7 @@ local M = {}
 M.ui = {
   theme_toggle = { "onenord", "one_light" },
   theme = "onenord",
+  transparency=true,
   tabufline = {
     lazyload = false,
   },
