@@ -153,10 +153,17 @@ return {
     end,
   },
   ["simrat39/symbols-outline.nvim"] = {
+    after = "nvim-lspconfig",
     config = function()
       require("symbols-outline").setup()
     end,
   },
+  -- ["ja-ford/delaytrain.nvim"] = {
+  --   event = "VimEnter",
+  --   config = function()
+  --     require("delaytrain").setup()
+  --   end,
+  -- },
   ["folke/noice.nvim"] = {
     event = "VimEnter",
     config = function()

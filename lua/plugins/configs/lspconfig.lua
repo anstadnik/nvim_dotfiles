@@ -1,5 +1,6 @@
 local present, lspconfig = pcall(require, "lspconfig")
 
+print(present)
 if not present then
   return
 end

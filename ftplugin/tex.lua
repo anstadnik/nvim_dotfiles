@@ -1,5 +1,6 @@
 vim.g.tex_comment_nospell = 1
 vim.wo.conceallevel = 2
+vim.g.tex_conceal = "abdgm"
 vim.opt_local.spell = true
 vim.opt_local.spelllang = { "en_gb", "uk", "ru" }
 

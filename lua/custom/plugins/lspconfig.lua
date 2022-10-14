@@ -1,15 +1,8 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local on_attach_with_format = function(client, bufnr)
   on_attach(client, bufnr)
-  if vim.g.vim_version > 7 then
-    -- nightly
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
-  else
-    -- stable
-    client.resolved_capabilities.document_formatting = true
-    client.resolved_capabilities.document_range_formatting = true
-  end
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(require("plugins.configs.lspconfig").capabilities)
