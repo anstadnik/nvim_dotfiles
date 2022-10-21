@@ -1,22 +1,26 @@
 local path = vim.api.nvim_buf_get_name(0)
 
-if path:match('/home/astadnik/code/.*') then
-   local problem_id = path:match("[^/]*$"):match("%d*%."):sub(1, -2)
-   vim.keymap.set('n', '<CR>', function()
-      require("nvterm.terminal").send("leetcode test " .. problem_id, "horizontal")
-   end, {})
-   vim.keymap.set('n', '<leader><CR>', function()
-      require("nvterm.terminal").send("leetcode exec " .. problem_id, "horizontal")
-   end, {})
+if path:match "/home/astadnik/code/.*" then
+  local problem_id = path:match("[^/]*$"):match("%d*%."):sub(1, -2)
+  vim.keymap.set("n", "<CR>", function()
+    require("nvterm.terminal").send("leetcode test " .. problem_id, "horizontal")
+  end, {})
+  vim.keymap.set("n", "<leader><CR>", function()
+    require("nvterm.terminal").send("leetcode exec " .. problem_id, "horizontal")
+  end, {})
+elseif path:match "/tmp/leetcode/.*" then
+  vim.keymap.set("n", "<CR>", function()
+    require("nvterm.terminal").send("cargo test", "horizontal")
+  end, {})
 else
-   vim.keymap.set('n', '<CR>', function()
-      vim.fn.system { "tmux", "send-keys", "-t", "debug:1.1", "clear\n" }
-      vim.fn.system { "tmux", "send-keys", "-t", "debug:1.1", "cargo run\n" }
-   end, {})
-   vim.keymap.set('n', '<leader><CR>', function()
-      vim.fn.system { "tmux", "send-keys", "-t", "debug:1.1", "clear\n" }
-      vim.fn.system { "tmux", "send-keys", "-t", "debug:1.1", "cargo run --release\n" }
-   end, {})
+  vim.keymap.set("n", "<CR>", function()
+    vim.fn.system { "tmux", "send-keys", "-t", "debug:1.1", "clear\n" }
+    vim.fn.system { "tmux", "send-keys", "-t", "debug:1.1", "cargo run\n" }
+  end, {})
+  vim.keymap.set("n", "<leader><CR>", function()
+    vim.fn.system { "tmux", "send-keys", "-t", "debug:1.1", "clear\n" }
+    vim.fn.system { "tmux", "send-keys", "-t", "debug:1.1", "cargo run --release\n" }
+  end, {})
 end
 -- 	nnoremap <silent> <CR> :AsyncRun tmux send-keys -t debug:1.1 'clear' ENTER 'cargo test -- --nocapture --test-threads 1' ENTER <CR>
 -- elseif expand("%:p:h") =~ '/home/astadnik/.leetcode/code/*'

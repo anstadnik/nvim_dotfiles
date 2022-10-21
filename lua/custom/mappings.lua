@@ -249,4 +249,69 @@ M.rust_tools = {
   },
 }
 
+M.dap = {
+  n = {
+    ["<leader>dd"] = {
+      function()
+        require("dapui").toggle()
+      end,
+      "Dap",
+    },
+    ["<leader>dr"] = {
+      function()
+        require("dap").continue()
+      end,
+      "Dap",
+    },
+    ["<leader>dn"] = {
+      function()
+        require("dap").step_over()
+      end,
+      "Dap",
+    },
+    ["<leader>di"] = {
+      function()
+        require("dap").step_into()
+      end,
+      "Dap",
+    },
+    ["<leader>df"] = {
+      function()
+        require("dap").step_out()
+      end,
+      "Dap",
+    },
+    ["<leader>db"] = {
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      "Dap",
+    },
+    ["<leader>dB"] = {
+      function()
+        require("dap").set_breakpoint(vim.fn.input "Breakpoint condition: ")
+      end,
+      "Dap",
+    },
+    ["<leader>dp"] = {
+      function()
+        require("dap").set_breakpoint(vim.fn.input "Breakpoint condition: ")
+      end,
+      "Dap",
+    },
+    ["<leader>dl"] = {
+      function()
+        require("dap").run_last()
+      end,
+      "Dap",
+    },
+    ["<leader>dq"] = {
+      function()
+        require("dap").terminate()
+      end,
+      "Dap",
+    },
+  },
+}
+
 return M

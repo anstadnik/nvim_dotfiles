@@ -1,7 +1,7 @@
 return {
   ["machakann/vim-sandwich"] = { keys = { "sa", "sd", "sr" } },
   ["kkoomen/vim-doge"] = {
-    keys = { "<leader>d" },
+    keys = { "D" },
     run = ":call doge#install()",
   },
   ["will133/vim-dirdiff"] = {
@@ -164,18 +164,65 @@ return {
   --     require("delaytrain").setup()
   --   end,
   -- },
-  ["folke/noice.nvim"] = {
-    event = "VimEnter",
+  -- ["folke/noice.nvim"] = {
+  --   event = "VimEnter",
+  --   config = function()
+  --     -- require("notify").setup {
+  --     --   background_colour = "#000000",
+  --     -- }
+  --     require("noice").setup {
+  --       -- notify = { enabled = false },
+  --     }
+  --   end,
+  --   requires = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   },
+  -- },
+  ["mfussenegger/nvim-dap"] = {
+    module = { "dapui", "dap" },
     config = function()
-      require("notify").setup {
-        background_colour = "#000000",
-      }
-      require("noice").setup()
+      require("dapui").setup()
+      require("telescope").load_extension "dap"
+      require("dap-python").setup "~/.virtualenvs/masters/bin/python"
+      require("nvim-dap-virtual-text").setup()
+
+      -- local dap = require "dap"
+      -- local api = vim.api
+      -- local keymap_restore = {}
+      -- dap.listeners.after["event_initialized"]["me"] = function()
+      --   for _, buf in pairs(api.nvim_list_bufs()) do
+      --     local keymaps = api.nvim_buf_get_keymap(buf, "n")
+      --     for _, keymap in pairs(keymaps) do
+      --       if keymap.lhs == "K" then
+      --         table.insert(keymap_restore, keymap)
+      --         api.nvim_buf_del_keymap(buf, "n", "K")
+      --       end
+      --     end
+      --   end
+      --   api.nvim_set_keymap("n", "K", '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
+      -- end
+      --
+      -- dap.listeners.after["event_terminated"]["me"] = function()
+      --   for _, keymap in pairs(keymap_restore) do
+      --     api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, keymap.rhs, { silent = keymap.silent == 1 })
+      --   end
+      --   keymap_restore = {}
+      -- end
+      require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        sources = {
+          { name = "dap" },
+        },
+      })
     end,
     requires = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
+      "mfussenegger/nvim-dap",
+      "mfussenegger/nvim-dap-python",
+      "rcarriga/cmp-dap",
+      "nvim-telescope/telescope-dap.nvim",
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
     },
   },
 }

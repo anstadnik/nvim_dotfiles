@@ -5,7 +5,7 @@ local on_attach_with_format = function(client, bufnr)
     client.server_capabilities.documentRangeFormattingProvider = true
 end
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(require("plugins.configs.lspconfig").capabilities)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
