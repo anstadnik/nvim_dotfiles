@@ -2,12 +2,16 @@ local M = {}
 
 M.treesitter = {
   ensure_installed = {
-    "rust",
+    -- "rust",
     "python",
     "lua",
     "comment",
     "latex",
     "bash",
+    "vim",
+    "regex",
+    "markdown",
+    "markdown_inline"
   },
   textobjects = {
     select = {

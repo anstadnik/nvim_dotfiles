@@ -1,8 +1,18 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
+local on_attach = function(client, bufnr)
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
+
+  require("core.utils").load_mappings("lspconfig", { buffer = bufnr })
+  -- if client.server_capabilities.signatureHelpProvider then
+  --   require("nvchad_ui.signature").setup(client)
+  -- end
+end
+
 local on_attach_with_format = function(client, bufnr)
-  on_attach(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = true
-    client.server_capabilities.documentRangeFormattingProvider = true
+  client.server_capabilities.documentFormattingProvider = true
+  client.server_capabilities.documentRangeFormattingProvider = true
+
+  require("core.utils").load_mappings("lspconfig", { buffer = bufnr })
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -51,7 +61,6 @@ rt.setup {
     },
   },
 }
-
 
 -- -- alternatively you can override the default configs
 -- require("flutter-tools").setup {

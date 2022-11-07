@@ -37,7 +37,7 @@ local options = {
       winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
     },
     documentation = {
-      border = border "CmpDocBorder",
+      border = border "CmpBorder",
     },
   },
   snippet = {

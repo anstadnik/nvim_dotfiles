@@ -5,7 +5,7 @@ if not present then
 end
 
 require("base46").load_highlight "lsp"
-require "nvchad_ui.lsp"
+-- require "nvchad_ui.lsp"
 
 local M = {}
 local utils = require "core.utils"

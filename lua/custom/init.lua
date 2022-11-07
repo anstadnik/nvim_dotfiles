@@ -1,4 +1,4 @@
-vim.g.tex_flavor = 'latex'
+vim.g.tex_flavor = "latex"
 vim.opt.mouse = ""
 vim.opt.scrolloff = 5
 vim.opt.gdefault = true
@@ -7,4 +7,12 @@ vim.opt.relativenumber = true
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 
-vim.opt.foldlevelstart=99
+vim.opt.foldlevelstart = 99
+
+vim.diagnostic.config {
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+}

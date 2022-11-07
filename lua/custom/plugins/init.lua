@@ -63,19 +63,11 @@ return {
     end,
   },
 
-  ["Maan2003/lsp_lines.nvim"] = {
+  ["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = {
     ft = { "rust", "py" },
     config = function()
       require("lsp_lines").setup()
       -- Disable virtual_text since it's redundant due to lsp_lines.
-
-      vim.diagnostic.config {
-        virtual_text = false,
-        signs = true,
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true,
-      }
     end,
   },
   ["tzachar/cmp-tabnine"] = {
@@ -150,6 +142,23 @@ return {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.plugins.lspconfig"
+      -- vim.notify = require("noice").notify
+      -- vim.lsp.handlers["textDocument/hover"] = require("noice").hover
+      -- vim.lsp.handlers["textDocument/signatureHelp"] = require("noice").signature
+
+      -- require("noice").setup {
+      --   -- lsp = {
+      --   --   override = {
+      --   --     -- override the default lsp markdown formatter with Noice
+      --   --     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      --   --     -- override the lsp markdown formatter with Noice
+      --   --     ["vim.lsp.util.stylize_markdown"] = true,
+      --   --     -- override cmp documentation with Noice (needs the other options to work)
+      --   --     ["cmp.entry.get_documentation"] = true,
+      --   --   },
+      --   -- },
+      --   -- -- notify = { enabled = false },
+      -- }
     end,
   },
   ["simrat39/symbols-outline.nvim"] = {
@@ -164,65 +173,78 @@ return {
   --     require("delaytrain").setup()
   --   end,
   -- },
-  -- ["folke/noice.nvim"] = {
-  --   event = "VimEnter",
-  --   config = function()
-  --     -- require("notify").setup {
-  --     --   background_colour = "#000000",
-  --     -- }
-  --     require("noice").setup {
-  --       -- notify = { enabled = false },
-  --     }
-  --   end,
-  --   requires = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     "MunifTanjim/nui.nvim",
-  --     "rcarriga/nvim-notify",
-  --   },
-  -- },
-  ["mfussenegger/nvim-dap"] = {
-    module = { "dapui", "dap" },
+  ["folke/noice.nvim"] = {
+    -- event = "VimEnter",
     config = function()
-      require("dapui").setup()
-      require("telescope").load_extension "dap"
-      require("dap-python").setup "~/.virtualenvs/masters/bin/python"
-      require("nvim-dap-virtual-text").setup()
-
-      -- local dap = require "dap"
-      -- local api = vim.api
-      -- local keymap_restore = {}
-      -- dap.listeners.after["event_initialized"]["me"] = function()
-      --   for _, buf in pairs(api.nvim_list_bufs()) do
-      --     local keymaps = api.nvim_buf_get_keymap(buf, "n")
-      --     for _, keymap in pairs(keymaps) do
-      --       if keymap.lhs == "K" then
-      --         table.insert(keymap_restore, keymap)
-      --         api.nvim_buf_del_keymap(buf, "n", "K")
-      --       end
-      --     end
-      --   end
-      --   api.nvim_set_keymap("n", "K", '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
-      -- end
-      --
-      -- dap.listeners.after["event_terminated"]["me"] = function()
-      --   for _, keymap in pairs(keymap_restore) do
-      --     api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, keymap.rhs, { silent = keymap.silent == 1 })
-      --   end
-      --   keymap_restore = {}
-      -- end
-      require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-        sources = {
-          { name = "dap" },
-        },
-      })
+      require("notify").setup {
+        background_colour = "#000000",
+      }
+      require("noice").setup {
+        notify = { enable =false},
+        signature = {enable =false},
+        hover = {enable = falseg}
+        -- lsp = {
+        --   override = {
+        --     -- override the default lsp markdown formatter with Noice
+        --     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        --     -- override the lsp markdown formatter with Noice
+        --     ["vim.lsp.util.stylize_markdown"] = true,
+        --     -- override cmp documentation with Noice (needs the other options to work)
+        --     ["cmp.entry.get_documentation"] = true,
+        --   },
+        -- },
+        -- -- notify = { enabled = false },
+      }
     end,
     requires = {
-      "mfussenegger/nvim-dap",
-      "mfussenegger/nvim-dap-python",
-      "rcarriga/cmp-dap",
-      "nvim-telescope/telescope-dap.nvim",
-      "rcarriga/nvim-dap-ui",
-      "theHamsta/nvim-dap-virtual-text",
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
     },
   },
+  -- ["mfussenegger/nvim-dap"] = {
+  --   module = { "dapui", "dap" },
+  --   config = function()
+  --     require("dapui").setup()
+  --     require("telescope").load_extension "dap"
+  --     require("dap-python").setup "~/.virtualenvs/masters/bin/python"
+  --     require("nvim-dap-virtual-text").setup()
+  --
+  --     -- local dap = require "dap"
+  --     -- local api = vim.api
+  --     -- local keymap_restore = {}
+  --     -- dap.listeners.after["event_initialized"]["me"] = function()
+  --     --   for _, buf in pairs(api.nvim_list_bufs()) do
+  --     --     local keymaps = api.nvim_buf_get_keymap(buf, "n")
+  --     --     for _, keymap in pairs(keymaps) do
+  --     --       if keymap.lhs == "K" then
+  --     --         table.insert(keymap_restore, keymap)
+  --     --         api.nvim_buf_del_keymap(buf, "n", "K")
+  --     --       end
+  --     --     end
+  --     --   end
+  --     --   api.nvim_set_keymap("n", "K", '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
+  --     -- end
+  --     --
+  --     -- dap.listeners.after["event_terminated"]["me"] = function()
+  --     --   for _, keymap in pairs(keymap_restore) do
+  --     --     api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, keymap.rhs, { silent = keymap.silent == 1 })
+  --     --   end
+  --     --   keymap_restore = {}
+  --     -- end
+  --     require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+  --       sources = {
+  --         { name = "dap" },
+  --       },
+  --     })
+  --   end,
+  --   requires = {
+  --     "mfussenegger/nvim-dap",
+  --     "mfussenegger/nvim-dap-python",
+  --     "rcarriga/cmp-dap",
+  --     "nvim-telescope/telescope-dap.nvim",
+  --     "rcarriga/nvim-dap-ui",
+  --     "theHamsta/nvim-dap-virtual-text",
+  --   },
+  -- },
 }
