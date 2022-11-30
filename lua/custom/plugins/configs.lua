@@ -2,7 +2,7 @@ local M = {}
 
 M.treesitter = {
   ensure_installed = {
-    -- "rust",
+    "rust",
     "python",
     "lua",
     "comment",
@@ -11,7 +11,7 @@ M.treesitter = {
     "vim",
     "regex",
     "markdown",
-    "markdown_inline"
+    "markdown_inline",
   },
   textobjects = {
     select = {
@@ -63,9 +63,10 @@ M.treesitter = {
       node_decremental = "<leader>m",
     },
   },
-  -- indent = {
-  --   enable = true,
-  -- },
+  indent = {
+    enable = true,
+    disable = { "python" },
+  },
 }
 
 M.nvimcmp = function()
@@ -125,13 +126,37 @@ M.nvimcmp = function()
           end
         end, { "i", "s" }),
       },
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          require("copilot_cmp.comparators").prioritize,
+          require("copilot_cmp.comparators").score,
+
+          -- Below is the default comparitor list and order for nvim-cmp
+          cmp.config.compare.offset,
+          -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.locality,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      },
       sources = {
-        { name = "luasnip" },
+        { name = "copilot" },
+        { name = "cmp_tabnine" },
         { name = "nvim_lsp" },
         { name = "buffer" },
         { name = "nvim_lua" },
         { name = "path" },
-        { name = "cmp_tabnine" },
+        { name = "luasnip" },
+        { name = "git" },
+      },
+      formatters = {
+        insert_text = require("copilot_cmp.format").remove_existing,
       },
     }
   end

@@ -1,16 +1,14 @@
 local path = vim.api.nvim_buf_get_name(0)
 
-if path:match "/home/astadnik/code/.*" then
+if path:match(vim.fn.expand "~/.leetcode/code/" .. ".*") then
   local problem_id = path:match("[^/]*$"):match("%d*%."):sub(1, -2)
-  vim.keymap.set("n", "<CR>", function()
+    vim.keymap.set("n", "<CR>", function()
+    vim.api.nvim_command "write"
     require("nvterm.terminal").send("leetcode test " .. problem_id, "horizontal")
   end, {})
   vim.keymap.set("n", "<leader><CR>", function()
+    vim.api.nvim_command('write')
     require("nvterm.terminal").send("leetcode exec " .. problem_id, "horizontal")
-  end, {})
-elseif path:match "/tmp/leetcode/.*" then
-  vim.keymap.set("n", "<CR>", function()
-    require("nvterm.terminal").send("cargo test", "horizontal")
   end, {})
 else
   vim.keymap.set("n", "<CR>", function()

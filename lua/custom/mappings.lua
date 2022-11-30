@@ -314,4 +314,10 @@ M.dap = {
   },
 }
 
+M.cheat_sh = {
+  n = {
+    ["<leader><leader>"] = { "<cmd> Cheat <CR>", "Cheat.sh" },
+  },
+}
+
 return M

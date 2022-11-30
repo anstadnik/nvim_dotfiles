@@ -84,6 +84,36 @@ return {
       }
     end,
   },
+  ["RishabhRD/nvim-cheat.sh"] = {
+    requires = "RishabhRD/popfix",
+    config = function()
+      require("core.utils").load_mappings "cheat_sh"
+    end,
+  },
+
+  -- ["github/copilot.vim"] = {},
+
+  ["zbirenbaum/copilot.lua"] = {
+    event = "InsertEnter",
+    config = function()
+      vim.schedule(function()
+        require("copilot").setup()
+      end)
+    end,
+  },
+  ["zbirenbaum/copilot-cmp"] = {
+    after = "copilot.lua",
+    module = "copilot_cmp",
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+  ["petertriho/cmp-git"] = {
+    after = "nvim-cmp",
+    config = function()
+      require("cmp_git").setup()
+    end,
+  },
 
   -- Override
   ["nvim-telescope/telescope.nvim"] = {
@@ -142,23 +172,6 @@ return {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.plugins.lspconfig"
-      -- vim.notify = require("noice").notify
-      -- vim.lsp.handlers["textDocument/hover"] = require("noice").hover
-      -- vim.lsp.handlers["textDocument/signatureHelp"] = require("noice").signature
-
-      -- require("noice").setup {
-      --   -- lsp = {
-      --   --   override = {
-      --   --     -- override the default lsp markdown formatter with Noice
-      --   --     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      --   --     -- override the lsp markdown formatter with Noice
-      --   --     ["vim.lsp.util.stylize_markdown"] = true,
-      --   --     -- override cmp documentation with Noice (needs the other options to work)
-      --   --     ["cmp.entry.get_documentation"] = true,
-      --   --   },
-      --   -- },
-      --   -- -- notify = { enabled = false },
-      -- }
     end,
   },
   ["simrat39/symbols-outline.nvim"] = {
@@ -168,7 +181,6 @@ return {
     end,
   },
   -- ["ja-ford/delaytrain.nvim"] = {
-  --   event = "VimEnter",
   --   config = function()
   --     require("delaytrain").setup()
   --   end,
@@ -180,9 +192,9 @@ return {
         background_colour = "#000000",
       }
       require("noice").setup {
-        notify = { enable =false},
-        signature = {enable =false},
-        hover = {enable = falseg}
+        notify = { enable = false },
+        signature = { enable = false },
+        hover = { enable = false },
         -- lsp = {
         --   override = {
         --     -- override the default lsp markdown formatter with Noice

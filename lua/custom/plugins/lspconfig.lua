@@ -150,9 +150,13 @@ lspconfig["texlab"].setup {
       diagnosticsDelay = 300,
       formatterLineLength = 80,
       forwardSearch = {
-        args = { "--synctex-forward", "%l:1:%f", "%p" },
-        executable = "zathura",
+        executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+        args = { "-g", "%l", "%p", "%f" },
       },
+      -- forwardSearch = {
+      --   args = { "--synctex-forward", "%l:1:%f", "%p" },
+      --   executable = "zathura",
+      -- },
       chktex = { onOpenAndSave = true, onEdit = false },
       latexFormatter = "latexindent",
       latexindent = {
