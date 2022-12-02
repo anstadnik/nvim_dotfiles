@@ -1,4 +1,13 @@
 return {
+  -- ["luk400/vim-jukit"] = {
+  -- },
+  ["goerz/jupytext.vim"] = {
+    filetype = "json",
+    setup = function()
+      -- vim.g.jupytext_print_debug_msgs = false
+      vim.g.jupytext_fmt = "py"
+    end,
+  },
   ["machakann/vim-sandwich"] = { keys = { "sa", "sd", "sr" } },
   ["kkoomen/vim-doge"] = {
     keys = { "D" },
@@ -102,7 +111,7 @@ return {
     end,
   },
   ["zbirenbaum/copilot-cmp"] = {
-    after = "copilot.lua",
+    after = { "copilot.lua", "nvim-cmp" },
     module = "copilot_cmp",
     config = function()
       require("copilot_cmp").setup()
@@ -110,6 +119,7 @@ return {
   },
   ["petertriho/cmp-git"] = {
     after = "nvim-cmp",
+    requires = "nvim-lua/plenary.nvim",
     config = function()
       require("cmp_git").setup()
     end,
@@ -258,5 +268,38 @@ return {
   --     "rcarriga/nvim-dap-ui",
   --     "theHamsta/nvim-dap-virtual-text",
   --   },
+  -- },
+
+  -- ["https://gitlab.com/astadnik/snippets"] = {},
+  -- ["smjonas/snippet-converter.nvim"] = {
+  --   config = function()
+  --     local template = {
+  --       -- name = "t1", (optionally give your template a name to refer to it in the `ConvertSnippets` command)
+  --       sources = {
+  --         ultisnips = {
+  --           -- Add snippets from (plugin) folders or individual files on your runtimepath...
+  --           -- "https://gitlab.com/astadnik/snippets",
+  --           -- "./latex-snippets/tex.snippets",
+  --           -- ...or use absolute paths on your system.
+  --           vim.fn.stdpath "config" .. "/snippets/UltiSnips",
+  --         },
+  --         -- snipmate = {
+  --         --   "vim-snippets/snippets",
+  --         -- },
+  --       },
+  --       output = {
+  --         -- Specify the output formats and paths
+  --         vscode_luasnip = {
+  --           vim.fn.stdpath "config" .. "/luasnip_snippets",
+  --         },
+  --       },
+  --     }
+  --
+  --     require("snippet_converter").setup {
+  --       templates = { template },
+  --       -- To change the default settings (see configuration section in the documentation)
+  --       -- settings = {},
+  --     }
+  --   end,
   -- },
 }

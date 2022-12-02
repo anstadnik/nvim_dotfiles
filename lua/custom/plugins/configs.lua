@@ -146,6 +146,7 @@ M.nvimcmp = function()
         },
       },
       sources = {
+        { name = "git" },
         { name = "copilot" },
         { name = "cmp_tabnine" },
         { name = "nvim_lsp" },
@@ -153,7 +154,6 @@ M.nvimcmp = function()
         { name = "nvim_lua" },
         { name = "path" },
         { name = "luasnip" },
-        { name = "git" },
       },
       formatters = {
         insert_text = require("copilot_cmp.format").remove_existing,
