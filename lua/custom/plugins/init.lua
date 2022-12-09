@@ -190,6 +190,17 @@ return {
       require("symbols-outline").setup()
     end,
   },
+  ["jpalardy/vim-slime"] = {
+    filetype = "julia",
+    config = function()
+      vim.g.slime_dont_ask_default = 1
+      vim.g.slime_no_mappings = 1
+      vim.g.slime_target = "tmux"
+      require("core.utils").load_mappings "slime"
+      vim.g.slime_default_config = { socket_name = "default", target_pane = "{left-of}" }
+      -- vim.g.slime_default_config = { socket_name = "default", target_pane = ":" }
+    end,
+  },
   -- ["ja-ford/delaytrain.nvim"] = {
   --   config = function()
   --     require("delaytrain").setup()

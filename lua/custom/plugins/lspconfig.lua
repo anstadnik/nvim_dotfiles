@@ -24,21 +24,24 @@ local lspconfig = require "lspconfig"
 local servers = { "pyright", "bashls" }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+  lspconfig[lsp].setup { on_attach = on_attach, capabilities = capabilities }
 end
 
-lspconfig["yamlls"].setup {
-  on_attach = on_attach_with_format,
-  capabilities = capabilities,
-}
+local servers_with_format = { "julials", "yamlls", "dockerls" }
 
-lspconfig["dockerls"].setup {
-  on_attach = on_attach_with_format,
-  capabilities = capabilities,
-}
+for _, lsp in ipairs(servers_with_format) do
+  lspconfig[lsp].setup { on_attach = on_attach_with_format, capabilities = capabilities }
+end
+
+-- lspconfig["yamlls"].setup {
+--   on_attach = on_attach_with_format,
+--   capabilities = capabilities,
+-- }
+--
+-- lspconfig["dockerls"].setup {
+--   on_attach = on_attach_with_format,
+--   capabilities = capabilities,
+-- }
 
 local rt = require "rust-tools"
 rt.setup {

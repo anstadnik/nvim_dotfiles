@@ -12,6 +12,7 @@ M.treesitter = {
     "regex",
     "markdown",
     "markdown_inline",
+    "julia"
   },
   textobjects = {
     select = {

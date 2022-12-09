@@ -314,6 +314,11 @@ M.dap = {
   },
 }
 
+M.slime = {
+  n = { ["<CR>"] = { "<Plug>SlimeParagraphSend", "Slime" } },
+  x = { ["<CR>"] = { "<Plug>SlimeRegionSend", "Slime" } },
+}
+
 M.cheat_sh = {
   n = {
     ["<leader><leader>"] = { "<cmd> Cheat <CR>", "Cheat.sh" },
