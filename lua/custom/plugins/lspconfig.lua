@@ -27,7 +27,7 @@ for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup { on_attach = on_attach, capabilities = capabilities }
 end
 
-local servers_with_format = { "julials", "yamlls", "dockerls" }
+local servers_with_format = { "julials", "yamlls", "dockerls", "clangd" }
 
 for _, lsp in ipairs(servers_with_format) do
   lspconfig[lsp].setup { on_attach = on_attach_with_format, capabilities = capabilities }

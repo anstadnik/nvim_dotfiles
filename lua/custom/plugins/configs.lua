@@ -12,7 +12,8 @@ M.treesitter = {
     "regex",
     "markdown",
     "markdown_inline",
-    "julia"
+    "julia",
+    "cpp",
   },
   textobjects = {
     select = {
@@ -115,7 +116,8 @@ M.nvimcmp = function()
         ["<C-l>"] = cmp.mapping(function(fallback)
           if require("luasnip").jumpable(1) then
             vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-next", true, true, true), "")
-          else
+          elseif require("copilot.suggestion").is_visible() then
+            require("copilot.suggestion").accept()
             fallback()
           end
         end, { "i", "s" }),

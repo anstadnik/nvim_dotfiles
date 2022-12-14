@@ -106,7 +106,11 @@ return {
     event = "InsertEnter",
     config = function()
       vim.schedule(function()
-        require("copilot").setup()
+        require("copilot").setup {
+          suggestion = {
+            auto_trigger = true,
+          },
+        }
       end)
     end,
   },
@@ -197,8 +201,8 @@ return {
       vim.g.slime_no_mappings = 1
       vim.g.slime_target = "tmux"
       require("core.utils").load_mappings "slime"
-      vim.g.slime_default_config = { socket_name = "default", target_pane = "{left-of}" }
-      -- vim.g.slime_default_config = { socket_name = "default", target_pane = ":" }
+      -- vim.g.slime_default_config = { socket_name = "default", target_pane = "{left-of}" }
+      vim.g.slime_default_config = { socket_name = "default", target_pane = "{next}" }
     end,
   },
   -- ["ja-ford/delaytrain.nvim"] = {
