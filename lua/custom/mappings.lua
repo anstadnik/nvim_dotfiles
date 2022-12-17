@@ -315,7 +315,8 @@ M.dap = {
 }
 
 M.slime = {
-  n = { ["<CR>"] = { "<Plug>SlimeParagraphSend", "Slime" } },
+  -- n = { ["<CR>"] = { ":write<CR><Plug>SlimeParagraphSend", "Slime" } },
+  n = { ["<CR>"] = { ":write<CR><Plug>SlimeParagraphSend", "Slime" } },
   x = { ["<CR>"] = { "<Plug>SlimeRegionSend", "Slime" } },
 }
 

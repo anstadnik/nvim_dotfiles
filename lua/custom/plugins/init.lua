@@ -199,10 +199,15 @@ return {
     config = function()
       vim.g.slime_dont_ask_default = 1
       vim.g.slime_no_mappings = 1
-      vim.g.slime_target = "tmux"
+      vim.g.slime_target = "kitty"
       require("core.utils").load_mappings "slime"
       -- vim.g.slime_default_config = { socket_name = "default", target_pane = "{left-of}" }
-      vim.g.slime_default_config = { socket_name = "default", target_pane = "{next}" }
+      -- vim.g.slime_default_config = {  }
+      -- local pid = vim.fn.system "pgrep kitty"
+      -- pid = pid:gsub("[\n\r]", "")
+      -- local listen_on = string.format("unix:/tmp/mykitty-%s", pid)
+      -- print(pid, listen_on)
+      vim.g.slime_default_config = { listen_on = os.getenv("KITTY_LISTEN_ON"), window_id = 1 }
     end,
   },
   -- ["ja-ford/delaytrain.nvim"] = {
@@ -238,6 +243,13 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
+  },
+  ["iamcco/markdown-preview.nvim"] = {
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
   -- ["mfussenegger/nvim-dap"] = {
   --   module = { "dapui", "dap" },
