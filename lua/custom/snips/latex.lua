@@ -1,13 +1,15 @@
 local M = {}
 
-local ts = require 'vim.treesitter'
-local query = require 'vim.treesitter.query'
+local api = vim.api
+local ts = vim.treesitter
+local cond_obj = require('luasnip.extras.conditions')
 
 local MATH_NODES = {
 	displayed_equation = true,
 	inline_formula = true,
 	math_environment = true,
 }
+
 local ALIGN_ENVIRONMENTS = {
 	['{multline}']  = true,
 	['{multline*}'] = true,
@@ -28,8 +30,8 @@ local ALIGN_ENVIRONMENTS = {
 }
 
 local function get_node_at_cursor()
-	local buf = vim.api.nvim_get_current_buf()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local buf = api.nvim_get_current_buf()
+	local row, col = unpack(api.nvim_win_get_cursor(0))
 	row = row - 1
 	col = col - 1
 
@@ -37,6 +39,7 @@ local function get_node_at_cursor()
 	if not parser then
 		return
 	end
+
 	local root_tree = parser:parse()[1]
 	local root = root_tree and root_tree:root()
 
@@ -47,7 +50,27 @@ local function get_node_at_cursor()
 	return root:named_descendant_for_range(row, col, row, col)
 end
 
-function M.in_text()
+---Check if cursor is in treesitter node of 'math_environment': 'tikzcd'
+---@return boolean
+-- local function in_tikzcd()
+-- 	local buf = api.nvim_get_current_buf()
+-- 	local node = get_node_at_cursor()
+-- 	while node do
+-- 		if node:type() == 'generic_environment' then
+-- 			local begin = node:child(0)
+-- 			local names = begin and begin:field('name')
+
+-- 			if names and names[1] and ts.query.get_node_text(names[1], buf) == 'tikzcd' then
+-- 				return true
+-- 			end
+-- 		end
+-- 		node = node:parent()
+-- 	end
+-- 	return false
+-- end
+
+---Check if cursor is in treesitter node of 'text'
+local function in_text()
 	local node = get_node_at_cursor()
 	while node do
 		if node:type() == 'text_mode' then
@@ -60,7 +83,8 @@ function M.in_text()
 	return true
 end
 
-function M.in_mathzone()
+---Check if cursor is in treesitter node of 'math'
+local function in_mathzone()
 	local node = get_node_at_cursor()
 	while node do
 		if node:type() == 'text_mode' then
@@ -73,15 +97,17 @@ function M.in_mathzone()
 	return false
 end
 
-function M.in_align()
-	local buf = vim.api.nvim_get_current_buf()
+---Check if cursor is in treesitter node of 'math_environment': 'align'
+---@return boolean
+local function in_align()
+	local buf = api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
 		if node:type() == 'math_environment' then
 			local begin = node:child(0)
-			local names = begin and begin:field 'name'
+			local names = begin and begin:field('name')
 
-			if names and names[1] and ALIGN_ENVIRONMENTS[query.get_node_text(names[1], buf)] then
+			if names and names[1] and ALIGN_ENVIRONMENTS[ts.query.get_node_text(names[1], buf)] then
 				return true
 			end
 		end
@@ -90,13 +116,15 @@ function M.in_align()
 	return false
 end
 
-function M.in_xymatrix()
-	local buf = vim.api.nvim_get_current_buf()
+---Check if cursor is in treesitter node of 'generic_command': '\xymatrix'
+---@return boolean
+local function in_xymatrix()
+	local buf = api.nvim_get_current_buf()
 	local node = get_node_at_cursor()
 	while node do
 		if node:type() == 'generic_command' then
 			local names = node:child(0)
-			if names and query.get_node_text(names, buf) == '\\xymatrix' then
+			if names and ts.query.get_node_text(names, buf) == '\\xymatrix' then
 				return true
 			end
 		end
@@ -104,5 +132,10 @@ function M.in_xymatrix()
 	end
 	return false
 end
+
+M.in_mathzone = cond_obj.make_condition(in_mathzone)
+M.in_text = cond_obj.make_condition(in_text)
+M.in_align = cond_obj.make_condition(in_align)
+M.in_xymatrix = cond_obj.make_condition(in_xymatrix)
 
 return M

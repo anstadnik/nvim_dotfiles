@@ -1,6 +1,7 @@
 return {
   -- ["luk400/vim-jukit"] = {
   -- },
+  ["will133/vim-dirdiff"] = {},
   ["goerz/jupytext.vim"] = {
     filetype = "json",
     setup = function()
@@ -82,13 +83,6 @@ return {
     end,
   },
   ["tpope/vim-fugitive"] = {},
-  ["nvim-telescope/telescope-ui-select.nvim"] = {
-    event = "VimEnter",
-    after = "telescope.nvim",
-    config = function()
-      require("telescope").load_extension "ui-select"
-    end,
-  },
 
   -- Cmp-related in a comment box
   ["petertriho/cmp-git"] = {
@@ -126,13 +120,20 @@ return {
     override_options = require "custom.plugins.configs.cmp",
   },
   ["nvim-telescope/telescope.nvim"] = {
-    module = "telescope",
+    -- module = "telescope",
+    event = "VimEnter",
     override_options = function()
       return {
         extensions = {
           ["ui-select"] = { require("telescope.themes").get_cursor {} },
         },
       }
+    end,
+  },
+  ["nvim-telescope/telescope-ui-select.nvim"] = {
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "ui-select"
     end,
   },
   ["kyazdani42/nvim-tree.lua"] = { override_options = { diagnostics = { enable = true } } },
