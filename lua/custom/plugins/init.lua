@@ -8,21 +8,51 @@ return {
       vim.g.jupytext_fmt = "py"
     end,
   },
+
+  -- Text editing
   ["machakann/vim-sandwich"] = { keys = { "sa", "sd", "sr" } },
-  ["kkoomen/vim-doge"] = {
-    keys = { "D" },
-    run = ":call doge#install()",
-  },
-  ["will133/vim-dirdiff"] = {
-    command = "DirDiff",
-  },
+  ["junegunn/vim-easy-align"] = { keys = "ga" },
+  ["chaoren/vim-wordmotion"] = {},
+  ["rhysd/clever-f.vim"] = {},
+
+  -- ["kkoomen/vim-doge"] = {
+  --   keys = { "D" },
+  --   config = function()
+  --     vim.g.doge_enable_mappings = 0
+  --   end,
+  --   run = ":call doge#install()",
+  -- },
+
+  -- LSP
   ["simrat39/rust-tools.nvim"] = {
     module = "rust-tools",
     -- [[ requires = { 'nvim-lua/plenary.nvim' }, ]]
   },
-  -- ["akinsho/flutter-tools.nvim"] = {
-  --   module = "flutter-tools",
-  -- },
+  ["Saecki/crates.nvim"] = {
+    requires = { "nvim-lua/plenary.nvim", "jose-elias-alvarez/null-ls.nvim" },
+    event = "BufEnter Cargo.toml",
+    config = function()
+      require "null-ls"
+      require("crates").setup { null_ls = { enabled = true } }
+    end,
+  },
+  ["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = {
+    ft = { "rust", "py" },
+    config = function()
+      require("lsp_lines").setup()
+      -- Disable virtual_text since it's redundant due to lsp_lines.
+    end,
+  },
+  ["williamboman/mason-lspconfig.nvim"] = {
+    requires = "williamboman/mason.nvim",
+    after = "nvim-lspconfig",
+    config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup {
+        automatic_installation = true,
+      }
+    end,
+  },
   ["jose-elias-alvarez/null-ls.nvim"] = {
     after = "nvim-lspconfig",
     module = "null-ls",
@@ -37,33 +67,20 @@ return {
       }
     end,
   },
-  ["Saecki/crates.nvim"] = {
-    requires = { "nvim-lua/plenary.nvim", "jose-elias-alvarez/null-ls.nvim" },
-    event = "BufEnter Cargo.toml",
-    config = function()
-      require "null-ls"
-      require("crates").setup { null_ls = { enabled = true } }
-    end,
-  },
   ["folke/trouble.nvim"] = {
     cmd = "TroubleToggle",
     config = function()
       require("trouble").setup {}
     end,
   },
+
+  -- Treesitter
+  ["nvim-treesitter/nvim-treesitter-textobjects"] = { after = "nvim-treesitter" },
   ["numToStr/Navigator.nvim"] = {
     config = function()
       require("Navigator").setup { disable_on_zoom = true }
     end,
   },
-  ["junegunn/vim-easy-align"] = {
-    -- keys = "ga"
-  },
-  ["nvim-treesitter/nvim-treesitter-textobjects"] = {
-    after = "nvim-treesitter",
-  },
-  ["chaoren/vim-wordmotion"] = {},
-  ["rhysd/clever-f.vim"] = {},
   ["tpope/vim-fugitive"] = {},
   ["nvim-telescope/telescope-ui-select.nvim"] = {
     after = "telescope.nvim",
@@ -72,45 +89,19 @@ return {
     end,
   },
 
-  ["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = {
-    ft = { "rust", "py" },
-    config = function()
-      require("lsp_lines").setup()
-      -- Disable virtual_text since it's redundant due to lsp_lines.
-    end,
-  },
-  ["tzachar/cmp-tabnine"] = {
-    run = "./install.sh",
+  -- Cmp-related in a comment box
+  ["petertriho/cmp-git"] = {
     after = "nvim-cmp",
-  },
-  ["williamboman/mason-lspconfig.nvim"] = {
-    requires = "williamboman/mason.nvim",
-    after = "nvim-lspconfig",
+    requires = "nvim-lua/plenary.nvim",
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup {
-        automatic_installation = true,
-      }
+      require("cmp_git").setup()
     end,
   },
-  ["RishabhRD/nvim-cheat.sh"] = {
-    requires = "RishabhRD/popfix",
-    config = function()
-      require("core.utils").load_mappings "cheat_sh"
-    end,
-  },
-
-  -- ["github/copilot.vim"] = {},
-
   ["zbirenbaum/copilot.lua"] = {
     event = "InsertEnter",
     config = function()
       vim.schedule(function()
-        require("copilot").setup {
-          suggestion = {
-            auto_trigger = true,
-          },
-        }
+        require("copilot").setup { suggestion = { auto_trigger = true } }
       end)
     end,
   },
@@ -121,71 +112,34 @@ return {
       require("copilot_cmp").setup()
     end,
   },
-  ["petertriho/cmp-git"] = {
-    after = "nvim-cmp",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("cmp_git").setup()
-    end,
-  },
 
   -- Override
+  ["rafamadriz/friendly-snippets"] = false,
+  ["NvChad/nvim-colorizer.lua"] = false,
+  ["williamboman/mason.nvim"] = false,
+  ["nvim-treesitter/nvim-treesitter"] = { override_options = require "custom.plugins.configs.treesitter" },
+  ["hrsh7th/nvim-cmp"] = {
+    after = false,
+    override_options = require "custom.plugins.configs.nvimcmp",
+  },
   ["nvim-telescope/telescope.nvim"] = {
-    event = "BufRead",
-  },
-  ["L3MON4D3/LuaSnip"] = {
-    config = function()
-      local present, luasnip = pcall(require, "luasnip")
-
-      if not present then
-        return
-      end
-
-      require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.luasnippets_path or "" }
-      require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/luasnippets" }
-
-      vim.keymap.set("i", "<C-u>", function()
-        if require("luasnip").choice_active() then
-          require "luasnip.extras.select_choice"()
-        end
-      end)
-
-      require("luasnip").config.setup {
-        ext_opts = {
-          [require("luasnip.util.types").choiceNode] = {
-            active = {
-              virt_text = { { "●", "GruvboxOrange" } },
-            },
-          },
-          [require("luasnip.util.types").insertNode] = {
-            active = {
-              virt_text = { { "●", "GruvboxBlue" } },
-            },
-          },
+    override_options = {
+      extensions = {
+        ["ui-select"] = {
+          function()
+            return require("telescope.themes").get_cursor {}
+          end,
         },
-        history = true,
-        updateevents = "TextChanged,TextChangedI",
-        region_check_events = "CursorMoved,CursorHold,InsertEnter",
-        delete_check_events = "TextChanged",
-        enable_autosnippets = true,
-      }
-
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "LuasnipChoiceNodeEnter",
-        callback = function()
-          if require("luasnip").choice_active() then
-            vim.schedule(require "luasnip.extras.select_choice")
-            -- vim.defer_fn(require "luasnip.extras.select_choice", 200)
-          end
-        end,
-      })
-    end,
+      },
+    },
   },
+  ["kyazdani42/nvim-tree.lua"] = { override_options = { diagnostics = { enable = true } } },
+  ["lewis6991/gitsigns.nvim"] = { override_options = require "custom.plugins.configs.gitsigns" },
+  ["L3MON4D3/LuaSnip"] = require "custom.plugins.configs.luasnip",
   ["neovim/nvim-lspconfig"] = {
     config = function()
       require "plugins.configs.lspconfig"
-      require "custom.plugins.lspconfig"
+      require "custom.plugins.configs.lspconfig"
     end,
   },
   ["simrat39/symbols-outline.nvim"] = {
@@ -201,20 +155,9 @@ return {
       vim.g.slime_no_mappings = 1
       vim.g.slime_target = "kitty"
       require("core.utils").load_mappings "slime"
-      -- vim.g.slime_default_config = { socket_name = "default", target_pane = "{left-of}" }
-      -- vim.g.slime_default_config = {  }
-      -- local pid = vim.fn.system "pgrep kitty"
-      -- pid = pid:gsub("[\n\r]", "")
-      -- local listen_on = string.format("unix:/tmp/mykitty-%s", pid)
-      -- print(pid, listen_on)
-      vim.g.slime_default_config = { listen_on = os.getenv("KITTY_LISTEN_ON"), window_id = 1 }
+      vim.g.slime_default_config = { listen_on = os.getenv "KITTY_LISTEN_ON", window_id = 1 }
     end,
   },
-  -- ["ja-ford/delaytrain.nvim"] = {
-  --   config = function()
-  --     require("delaytrain").setup()
-  --   end,
-  -- },
   ["folke/noice.nvim"] = {
     -- event = "VimEnter",
     config = function()

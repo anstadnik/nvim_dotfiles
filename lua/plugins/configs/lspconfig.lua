@@ -49,8 +49,26 @@ lspconfig.sumneko_lua.setup {
 
   settings = {
     Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
       diagnostics = {
-        globals = { "vim" },
+        globals = {
+          "vim",
+          "s",
+          "t",
+          "i",
+          "c",
+          "conds",
+          "dl",
+          "l",
+          "f",
+          "sn",
+          "d",
+          "p",
+          "rep",
+          "events",
+        },
       },
       workspace = {
         library = {
