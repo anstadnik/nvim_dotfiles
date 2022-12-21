@@ -83,6 +83,7 @@ return {
   },
   ["tpope/vim-fugitive"] = {},
   ["nvim-telescope/telescope-ui-select.nvim"] = {
+    event = "VimEnter",
     after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "ui-select"
@@ -120,18 +121,19 @@ return {
   ["nvim-treesitter/nvim-treesitter"] = { override_options = require "custom.plugins.configs.treesitter" },
   ["hrsh7th/nvim-cmp"] = {
     after = false,
-    override_options = require "custom.plugins.configs.nvimcmp",
+    module = { "cmp", "cmp_nvim_lsp" },
+    event = "InsertEnter",
+    override_options = require "custom.plugins.configs.cmp",
   },
   ["nvim-telescope/telescope.nvim"] = {
-    override_options = {
-      extensions = {
-        ["ui-select"] = {
-          function()
-            return require("telescope.themes").get_cursor {}
-          end,
+    module = "telescope",
+    override_options = function()
+      return {
+        extensions = {
+          ["ui-select"] = { require("telescope.themes").get_cursor {} },
         },
-      },
-    },
+      }
+    end,
   },
   ["kyazdani42/nvim-tree.lua"] = { override_options = { diagnostics = { enable = true } } },
   ["lewis6991/gitsigns.nvim"] = { override_options = require "custom.plugins.configs.gitsigns" },

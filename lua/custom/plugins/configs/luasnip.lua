@@ -1,5 +1,5 @@
 local M = {}
-M.wants = nil
+M.wants = false
 M.override_options = {
   enable_autosnippets = true,
 }
