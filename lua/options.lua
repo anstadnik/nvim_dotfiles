@@ -1,3 +1,6 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.g.tex_flavor = "latex"
 vim.opt.mouse = ""
 vim.opt.scrolloff = 5
@@ -22,5 +25,3 @@ vim.diagnostic.config {
 }
 
 vim.opt.termguicolors = true
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1

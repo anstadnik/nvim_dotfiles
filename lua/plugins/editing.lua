@@ -1,6 +1,11 @@
 return {
   "machakann/vim-sandwich",
-  { "junegunn/vim-easy-align", keys = "ga" },
+  {
+    "junegunn/vim-easy-align",
+    config = function()
+      vim.keymap.set({ "n", "v" }, "ga", "<Plug>(EasyAlign)")
+    end,
+  },
   "chaoren/vim-wordmotion",
   "rhysd/clever-f.vim",
   {
@@ -14,9 +19,6 @@ return {
     -- keys = { "gc", "gb" },
     config = function()
       require("Comment").setup()
-    end,
-    setup = function()
-      require("core.utils").load_mappings "comment"
     end,
   },
 }

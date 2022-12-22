@@ -31,10 +31,4 @@ return {
       "nvim-tree/nvim-tree.lua",
     },
   },
-  {
-    "MunifTanjim/nui.nvim",
-    dependencies = {
-      "folke/noice.nvim",
-    },
-  },
 }

@@ -1,83 +1,84 @@
 return function()
-  local on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-
-    vim.keymap.set("n", "gd", "<cmd> Telescope lsp_definitions<CR>")
-    vim.keymap.set("n", "<leader>g", "<cmd> Telescope lsp_document_symbols<CR>")
-    vim.keymap.set("n", "<C-g>", "<cmd> SymbolsOutline<CR>")
-    vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references<CR>")
-    vim.keymap.set("n", "<leader>l", "<cmd> Telescope lsp_dynamic_workspace_symbols<CR>")
-    vim.keymap.set("n", "<leader>e", "<cmd> Telescope diagnostics<CR>")
-    vim.keymap.set("n", "gD", "<cmd> Telescope lsp_type_definitions<CR>")
+  local load_mapping = function(bufnr)
+    vim.keymap.set("n", "gd", "<cmd> Telescope lsp_definitions<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "<leader>g", "<cmd> Telescope lsp_document_symbols<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "<C-g>", "<cmd> SymbolsOutline<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "gr", "<cmd> Telescope lsp_references<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "<leader>l", "<cmd> Telescope lsp_dynamic_workspace_symbols<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "<leader>e", "<cmd> Telescope diagnostics<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "gD", "<cmd> Telescope lsp_type_definitions<CR>", { buffer = bufnr })
     vim.keymap.set("n", "<leader>fm", function()
       vim.lsp.buf.format { async = true }
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "[d", function()
       vim.diagnostic.goto_prev()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "]d", function()
       vim.diagnostic.goto_next()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "gD", function()
       vim.lsp.buf.declaration()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "gd", function()
       vim.lsp.buf.definition()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "K", function()
       vim.lsp.buf.hover()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>ls", function()
       vim.lsp.buf.signature_help()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>D", function()
       vim.lsp.buf.type_definition()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>ra", function()
       require("nvchad_ui.renamer").open()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>ca", function()
       vim.lsp.buf.code_action()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "gr", function()
       vim.lsp.buf.references()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>f", function()
       vim.diagnostic.open_float()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "[d", function()
       vim.diagnostic.goto_prev()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "]d", function()
       vim.diagnostic.goto_next()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>q", function()
       vim.diagnostic.setloclist()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>fm", function()
       vim.lsp.buf.format { async = true }
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>wa", function()
       vim.lsp.buf.add_workspace_folder()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>wr", function()
       vim.lsp.buf.remove_workspace_folder()
-    end)
+    end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end)
+    end, { buffer = bufnr })
 
     -- if client.server_capabilities.signatureHelpProvider then
     --   require("nvchad_ui.signature").setup(client)
     -- end
   end
+  local on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+    load_mapping(bufnr)
+  end
 
   local on_attach_with_format = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
-
-    require("core.utils").load_mappings("lspconfig", { buffer = bufnr })
+    load_mapping(bufnr)
   end
 
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -111,7 +112,9 @@ return function()
     server = {
       on_attach = function(client, bufnr)
         on_attach_with_format(client, bufnr)
-        require("core.utils").load_mappings("rust_tools", { buffer = bufnr })
+        vim.keymap.set("n", "K", function()
+          require("rust-tools").hover_actions.hover_actions()
+        end)
         -- Hover actions
         -- vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
       end,
@@ -186,7 +189,22 @@ return function()
     settings = {
       Lua = {
         diagnostics = {
-          globals = { "vim" },
+          globals = {
+            "vim",
+            "s",
+            "t",
+            "i",
+            "c",
+            "conds",
+            "dl",
+            "l",
+            "f",
+            "sn",
+            "d",
+            "p",
+            "rep",
+            "events",
+          },
         },
         workspace = {
           library = {

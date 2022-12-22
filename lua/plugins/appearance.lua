@@ -49,6 +49,12 @@ return {
     },
   },
   {
+    "MunifTanjim/nui.nvim",
+    dependencies = {
+      "folke/noice.nvim",
+    },
+  },
+  {
     "folke/noice.nvim",
     config = function()
       require("notify").setup {
@@ -73,9 +79,5 @@ return {
         },
       }
     end,
-    requires = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "rcarriga/nvim-notify",
-    },
   },
 }
