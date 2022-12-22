@@ -23,8 +23,11 @@ return {
           },
         },
         extensions = {
-          { "ui-select", { require("telescope.themes").get_cursor {} } },
+          ["ui-select"] = {
+            require("telescope.themes").get_ivy {},
+          },
         },
+        -- { "ui-select", { require("telescope.themes").get_cursor {} } },
       }
     end,
   },

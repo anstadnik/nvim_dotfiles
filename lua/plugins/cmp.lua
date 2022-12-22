@@ -42,7 +42,6 @@ return {
         callback = function()
           if require("luasnip").choice_active() then
             vim.schedule(require "luasnip.extras.select_choice")
-            -- vim.defer_fn(require "luasnip.extras.select_choice", 200)
           end
         end,
       })
