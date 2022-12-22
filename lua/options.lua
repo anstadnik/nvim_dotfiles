@@ -3,9 +3,13 @@ vim.opt.mouse = ""
 vim.opt.scrolloff = 5
 vim.opt.gdefault = true
 
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.opt.clipboard = "unnamedplus"
+vim.g.mapleader = " "
 
 vim.opt.foldlevelstart = 99
 
@@ -16,3 +20,7 @@ vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,
 }
+
+vim.opt.termguicolors = true
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
