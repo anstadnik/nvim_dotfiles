@@ -2,9 +2,9 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-refactor",
+      "nvim-treesitter/nvim-treesitter-textobjects",
       "p00f/nvim-ts-rainbow",
-      "andymass/vim-matchup",
+      -- "andymass/vim-matchup",
     },
     config = function()
       require("nvim-treesitter.configs").setup {
@@ -81,13 +81,13 @@ return {
           extended_mode = true,
           max_file_lines = nil,
         },
-        matchup = {
-          enable = true,
-        },
+        -- matchup = {
+        --   enable = true,
+        -- },
       }
     end,
   },
-  { "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" },
+  "nvim-treesitter/nvim-treesitter-textobjects",
   "p00f/nvim-ts-rainbow",
-  "andymass/vim-matchup",
+  -- "andymass/vim-matchup",
 }

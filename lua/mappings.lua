@@ -1,3 +1,7 @@
 vim.keymap.set({ "n", "v" }, ";", ":", { silent = false })
 vim.keymap.set({ "n", "v" }, ":", ";", { silent = false })
 vim.keymap.set("i", "jk", "<ESC>")
+local function termcodes(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+vim.keymap.set("t", "<C-x>", termcodes "<C-\\><C-N>")

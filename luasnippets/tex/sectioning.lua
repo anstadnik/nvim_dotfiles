@@ -15,7 +15,7 @@ snips = {
     condition = conds_expand.line_begin * tex.in_text,
     show_condition = position.line_begin * tex.in_text,
   }),
-  s({ trig = "sec", name = "Section", dscr = "Insert a new section.", regTrig = true }, {
+  s({ trig = "sec", name = "Section", dscr = "Insert a new section." }, {
     t { "\\section{" },
     i(1),
     t { "}\\label{sec:" },
@@ -25,7 +25,7 @@ snips = {
     condition = conds_expand.line_begin * tex.in_text,
     show_condition = position.line_begin * tex.in_text,
   }),
-  s({ trig = "ssec", name = "star Section", dscr = "Insert a section without index.", regTrig = true }, {
+  s({ trig = "ssec", name = "star Section", dscr = "Insert a section without index." }, {
     t { "\\section*{" },
     i(1),
     t { "}\\label{sec:" },
@@ -35,7 +35,7 @@ snips = {
     condition = conds_expand.line_begin * tex.in_text,
     show_condition = position.line_begin * tex.in_text,
   }),
-  s({ trig = "sub", name = "subSection", dscr = "Insert a new subsection.", regTrig = true }, {
+  s({ trig = "sub", name = "subSection", dscr = "Insert a new subsection." }, {
     t { "\\subsection{" },
     i(1),
     t { "}\\label{sub:" },
@@ -45,7 +45,7 @@ snips = {
     condition = conds_expand.line_begin * tex.in_text,
     show_condition = position.line_begin * tex.in_text,
   }),
-  s({ trig = "ssub", name = "star subSection", dscr = "Insert a subsection without index.", regTrig = true }, {
+  s({ trig = "ssub", name = "star subSection", dscr = "Insert a subsection without index." }, {
     t { "\\subsection*{" },
     i(1),
     t { "}\\label{sub:" },

@@ -32,9 +32,9 @@ return function()
       vim.lsp.buf.type_definition()
     end, { buffer = bufnr })
     vim.keymap.set("n", "<leader>ra", function()
-      require("nvchad_ui.renamer").open()
+      vim.lsp.buf.rename()
     end, { buffer = bufnr })
-    vim.keymap.set("n", "<leader>ca", function()
+    vim.keymap.set({"n", "v"}, "<leader>ca", function()
       vim.lsp.buf.code_action()
     end, { buffer = bufnr })
     vim.keymap.set("n", "gr", function()
@@ -87,7 +87,7 @@ return function()
   local lspconfig = require "lspconfig"
 
   -- lspservers with default config
-  local servers = { "pyright", "bashls" }
+  local servers = { "julials", "pyright", "bashls" }
 
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
@@ -171,8 +171,8 @@ return function()
         diagnosticsDelay = 300,
         formatterLineLength = 80,
         forwardSearch = {
-          args = { "--synctex-forward", "%l:1:%f", "%p" },
-          executable = "zathura",
+          executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+          args = { "-g", "%l", "%p", "%f" },
         },
         chktex = { onOpenAndSave = true, onEdit = false },
         latexFormatter = "latexindent",
