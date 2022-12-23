@@ -69,8 +69,8 @@ return {
     },
     config = function()
       vim.schedule(function()
-        require("copilot").setup {}
-        -- require("copilot").setup { suggestion = { auto_trigger = true } }
+        -- require("copilot").setup {}
+        require("copilot").setup { suggestion = { auto_trigger = true } }
       end)
     end,
   },

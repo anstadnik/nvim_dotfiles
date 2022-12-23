@@ -42,12 +42,13 @@ return {
       require("tabby.tabline").use_preset("active_tab_with_wins", {})
     end,
   },
-  {
-    "rcarriga/nvim-notify",
-    dependencies = {
-      "folke/noice.nvim",
-    },
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   dependencies = {
+  --     "folke/noice.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  -- },
   {
     "MunifTanjim/nui.nvim",
     dependencies = {
@@ -57,9 +58,9 @@ return {
   {
     "folke/noice.nvim",
     config = function()
-      require("notify").setup {
-        background_colour = "#000000",
-      }
+      -- require("notify").setup {
+      --   background_colour = "#000000",
+      -- }
       require("noice").setup {
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
