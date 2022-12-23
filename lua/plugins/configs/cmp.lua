@@ -71,11 +71,16 @@ return function()
     },
     sources = {
       { name = "luasnip" },
+      { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "buffer" },
       { name = "nvim_lua" },
       { name = "path" },
       { name = "cmp_tabnine" },
+    },
+    formatting = {
+      fields = { "kind", "abbr", "menu" },
+      format = require("lspkind").cmp_format { mode = "symbol" },
     },
   }
 end
