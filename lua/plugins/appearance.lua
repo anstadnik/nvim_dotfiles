@@ -1,25 +1,62 @@
 return {
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   config = function()
+  --     require("onedark").setup {
+  --       style = "dark",
+  --       transparent = true,
+  --       code_style = {
+  --         comments = "italic",
+  --         keywords = "none",
+  --         functions = "bold",
+  --         strings = "none",
+  --         variables = "none",
+  --       },
+  --     }
+  --     require("onedark").load()
+  --   end,
+  --   dependencies = "f-person/auto-dark-mode.nvim",
+  -- },
   {
-    "navarasu/onedark.nvim",
+    "rmehri01/onenord.nvim",
+    dependencies = "f-person/auto-dark-mode.nvim",
     config = function()
-      require("onedark").setup {
-
-        transparent = true,
-        code_style = {
+      require("onenord").setup {
+        styles = {
           comments = "italic",
           keywords = "none",
           functions = "bold",
           strings = "none",
           variables = "none",
         },
+        disable = { background = true },
       }
-      require("onedark").load()
+    end,
+  },
+  {
+    "f-person/auto-dark-mode.nvim",
+    config = function()
+      local auto_dark_mode = require "auto-dark-mode"
+
+      auto_dark_mode.setup {
+        update_interval = 1000,
+        set_dark_mode = function()
+          vim.api.nvim_set_option("background", "dark")
+          vim.fn.system { "kitty", "+kitten", "themes", "Onenord Dark" }
+        end,
+        set_light_mode = function()
+          vim.api.nvim_set_option("background", "light")
+          vim.fn.system { "kitty", "+kitten", "themes", "Onenord Light" }
+        end,
+      }
+      auto_dark_mode.init()
     end,
   },
   {
     "nvim-lualine/lualine.nvim",
     config = function()
       require("lualine").setup {
+        theme='onenord',
         options = {
           component_separators = "",
           section_separators = { left = "", right = "" },

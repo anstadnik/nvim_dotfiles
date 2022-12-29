@@ -3,8 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "p00f/nvim-ts-rainbow",
-      -- "andymass/vim-matchup",
+      -- "p00f/nvim-ts-rainbow",
     },
     config = function()
       require("nvim-treesitter.configs").setup {
@@ -76,18 +75,14 @@ return {
           enable = true,
           disable = { "python" },
         },
-        rainbow = {
-          enable = true,
-          extended_mode = true,
-          max_file_lines = nil,
-        },
-        -- matchup = {
+        -- rainbow = {
         --   enable = true,
+        --   extended_mode = true,
+        --   max_file_lines = nil,
         -- },
       }
     end,
   },
   "nvim-treesitter/nvim-treesitter-textobjects",
-  "p00f/nvim-ts-rainbow",
-  -- "andymass/vim-matchup",
+  -- "p00f/nvim-ts-rainbow",
 }

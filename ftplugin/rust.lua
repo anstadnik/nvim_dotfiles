@@ -11,10 +11,12 @@ if path:match(vim.fn.expand "~/.leetcode/code/" .. ".*") then
   --   require("nvterm.terminal").send("leetcode exec " .. problem_id, "horizontal")
   -- end, {})
   vim.keymap.set("n", "<CR>", function()
+    vim.api.nvim_command "write"
     vim.fn.system { "tmux", "send-keys", "-t", "{bottom-left}", "clear\n" }
     vim.fn.system { "tmux", "send-keys", "-t", "{bottom-left}", "leetcode test " .. problem_id .. "\n" }
   end, {})
   vim.keymap.set("n", "<leader><CR>", function()
+    vim.api.nvim_command "write"
     vim.fn.system { "tmux", "send-keys", "-t", "{bottom-left}", "clear\n" }
     vim.fn.system { "tmux", "send-keys", "-t", "{bottom-left}", "leetcode exec " .. problem_id .. "\n" }
   end, {})

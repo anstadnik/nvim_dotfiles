@@ -1,6 +1,7 @@
 vim.keymap.set({ "n", "v" }, ";", ":", { silent = false })
 vim.keymap.set({ "n", "v" }, ":", ";", { silent = false })
 vim.keymap.set("i", "jk", "<ESC>")
+vim.keymap.set("i", "<C-c>", "<cmd> %y+ <CR>")
 local function termcodes(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end

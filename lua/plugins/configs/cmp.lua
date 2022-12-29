@@ -8,43 +8,29 @@ return function()
     },
     mapping = {
       ["<C-p>"] = cmp.mapping.select_prev_item(),
-      -- function(fallback)
-      --   -- print(ls.choice_active())
-      --   if ls.choice_active() then
-      --     ls.change_choice(1)
-      --   elseif not require("cmp").select_prev_item() then
-      --     local release = require("cmp").core:suspend()
-      --     fallback()
-      --     vim.schedule(release)
-      --   end
-      -- end,
       ["<C-n>"] = cmp.mapping.select_next_item(),
-      -- function(fallback)
-      --   -- print(ls.choice_active())
-      --   if ls.choice_active() then
-      --     -- print("a")
-      --     ls.change_choice(-1)
-      --   elseif not require("cmp").select_next_item() then
-      --     local release = require("cmp").core:suspend()
-      --     fallback()
-      --     vim.schedule(release)
-      --   end
-      -- end,
-      ["<C-d>"] = cmp.mapping(function(fallback)
-        if not require("noice.lsp").scroll(4) then
-          fallback()
-        end
-      end),
-
       ["<C-f>"] = cmp.mapping(function(fallback)
-        if not require("noice.lsp").scroll(-4) then
+        if require("copilot.suggestion").is_visible() then
+          require("copilot.suggestion").accept()
+        else
           fallback()
         end
       end),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-j>"] = cmp.mapping {
-        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
-        c = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
+      ["<C-Space>"] = {
+        i = function()
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true }
+          else
+            cmp.complete()
+          end
+        end,
+        c = function()
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true }
+          else
+            cmp.complete()
+          end
+        end,
         x = function(fallback)
           if require("luasnip").jumpable() then
             require("luasnip").jump()
@@ -53,17 +39,26 @@ return function()
           end
         end,
       },
+      ["<C-j>"] = cmp.mapping(function(fallback)
+        if not require("noice.lsp").scroll(4) then
+          fallback()
+        end
+      end),
+      ["<C-k>"] = cmp.mapping(function(fallback)
+        if not require("noice.lsp").scroll(-4) then
+          fallback()
+        end
+      end),
       ["<C-l>"] = cmp.mapping(function(fallback)
         if require("luasnip").jumpable(1) then
-          vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-next", true, true, true), "")
-        elseif require("copilot.suggestion").is_visible() then
-          require("copilot.suggestion").accept()
+          require("luasnip").jump(1)
+        else
           fallback()
         end
       end, { "i", "s" }),
       ["<C-h>"] = cmp.mapping(function(fallback)
         if require("luasnip").jumpable(-1) then
-          vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+          require("luasnip").jump(-1)
         else
           fallback()
         end

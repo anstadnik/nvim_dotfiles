@@ -20,17 +20,17 @@ local appended_space_after_insert = function()
 end
 
 autosnips = {
-  s({
-    trig = "(%s)([b-zB-HJ-Z0-9])([,;.%-%)]?)%s+",
-    name = "single-letter variable",
-    wordTrig = false,
-    regTrig = true,
-    hidden = true,
-  }, {
-    f(function(_, snip)
-      return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
-    end, {}),
-  }, { condition = tex.in_text }),
+  -- s({
+  --   trig = "(%s)([b-zB-HJ-Z0-9])([,;.%-%)]?)%s+",
+  --   name = "single-letter variable",
+  --   wordTrig = false,
+  --   regTrig = true,
+  --   hidden = true,
+  -- }, {
+  --   f(function(_, snip)
+  --     return snip.captures[1] .. "\\(" .. snip.captures[2] .. "\\)" .. snip.captures[3]
+  --   end, {}),
+  -- }, { condition = tex.in_text }),
   s({
     trig = "(%s)([0-9]+[a-zA-Z]+)([,;.%)]?)%s+",
     name = "surround word starting with number",
