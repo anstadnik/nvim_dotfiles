@@ -34,3 +34,5 @@ vim.opt.shiftwidth = 2
 
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
+vim.opt.undofile = true
+-- vim.opt.foldlevelstart=99
