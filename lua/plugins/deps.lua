@@ -5,6 +5,7 @@ return {
       "Saecki/crates.nvim",
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",
+      "phaazon/mind.nvim",
     },
   },
   {
@@ -22,7 +23,8 @@ return {
           require("null-ls").builtins.formatting.black,
           require("null-ls").builtins.formatting.isort,
           require("null-ls").builtins.formatting.stylua,
-          require("null-ls").builtins.formatting.shfmt,
+          -- require("null-ls").builtins.formatting.shfmt,
+          require("null-ls").builtins.formatting.beautysh,
         },
       }
     end,

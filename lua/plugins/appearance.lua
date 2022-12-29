@@ -1,22 +1,4 @@
 return {
-  -- {
-  --   "navarasu/onedark.nvim",
-  --   config = function()
-  --     require("onedark").setup {
-  --       style = "dark",
-  --       transparent = true,
-  --       code_style = {
-  --         comments = "italic",
-  --         keywords = "none",
-  --         functions = "bold",
-  --         strings = "none",
-  --         variables = "none",
-  --       },
-  --     }
-  --     require("onedark").load()
-  --   end,
-  --   dependencies = "f-person/auto-dark-mode.nvim",
-  -- },
   {
     "rmehri01/onenord.nvim",
     dependencies = "f-person/auto-dark-mode.nvim",
@@ -35,6 +17,9 @@ return {
   },
   {
     "f-person/auto-dark-mode.nvim",
+    enabled = function()
+      return vim.fn.has "macunix"
+    end,
     config = function()
       local auto_dark_mode = require "auto-dark-mode"
 
@@ -56,7 +41,7 @@ return {
     "nvim-lualine/lualine.nvim",
     config = function()
       require("lualine").setup {
-        theme='onenord',
+        theme = "onenord",
         options = {
           component_separators = "",
           section_separators = { left = "", right = "" },

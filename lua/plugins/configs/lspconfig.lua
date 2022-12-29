@@ -34,7 +34,7 @@ return function()
     vim.keymap.set("n", "<leader>ra", function()
       vim.lsp.buf.rename()
     end, { buffer = bufnr })
-    vim.keymap.set({"n", "v"}, "<leader>ca", function()
+    vim.keymap.set({ "n", "v" }, "<leader>ca", function()
       vim.lsp.buf.code_action()
     end, { buffer = bufnr })
     -- vim.keymap.set("n", "gr", function()
@@ -87,7 +87,7 @@ return function()
   local lspconfig = require "lspconfig"
 
   -- lspservers with default config
-  local servers = { "julials", "pyright", "bashls" }
+  local servers = { "julials", "pyright" }
 
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
@@ -96,14 +96,19 @@ return function()
     }
   end
 
-  lspconfig["yamlls"].setup {
-    on_attach = on_attach_with_format,
-    capabilities = capabilities,
-  }
+  local servers_with_fmt = { "yamlls", "dockerls" }
 
-  lspconfig["dockerls"].setup {
-    on_attach = on_attach_with_format,
+  for _, lsp in ipairs(servers_with_fmt) do
+    lspconfig[lsp].setup {
+      on_attach = on_attach_with_format,
+      capabilities = capabilities,
+    }
+  end
+
+  lspconfig["bashls"].setup {
+    on_attach = on_attach,
     capabilities = capabilities,
+    filetypes = { "sh", "zsh", "bash" },
   }
 
   local rt = require "rust-tools"
