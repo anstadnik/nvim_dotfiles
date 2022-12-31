@@ -39,16 +39,8 @@ return function()
           end
         end,
       },
-      ["<C-j>"] = cmp.mapping(function(fallback)
-        if not require("noice.lsp").scroll(4) then
-          fallback()
-        end
-      end),
-      ["<C-k>"] = cmp.mapping(function(fallback)
-        if not require("noice.lsp").scroll(-4) then
-          fallback()
-        end
-      end),
+      ["<C-j>"] = cmp.mapping.scroll_docs(4),
+      ["<C-k>"] = cmp.mapping.scroll_docs(-4),
       ["<C-l>"] = cmp.mapping(function(fallback)
         if require("luasnip").jumpable(1) then
           require("luasnip").jump(1)
