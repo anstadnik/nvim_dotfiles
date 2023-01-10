@@ -56,7 +56,7 @@ return function()
   local lspconfig = require "lspconfig"
 
   -- lspservers with default config
-  local servers = { "julials", "pyright" }
+  local servers = { "pyright" }
 
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
@@ -65,7 +65,7 @@ return function()
     }
   end
 
-  local servers_with_fmt = { "yamlls", "dockerls" }
+  local servers_with_fmt = { "julials", "yamlls", "dockerls" }
 
   for _, lsp in ipairs(servers_with_fmt) do
     lspconfig[lsp].setup {
@@ -82,25 +82,48 @@ return function()
 
   local rt = require "rust-tools"
   rt.setup {
-    -- tools = { autoSetHints = false },
+    -- HACK: https://github.com/simrat39/rust-tools.nvim/issues/300
+    -- tools = {
+    --   inlay_hints = {
+    --     auto = false,
+    --   },
+    -- },
     server = {
       on_attach = function(client, bufnr)
         on_attach_with_format(client, bufnr)
         vim.keymap.set("n", "K", function()
           require("rust-tools").hover_actions.hover_actions()
         end)
-        -- Hover actions
-        -- vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
+        -- vim.keymap.set("x", "K", function()
+        --   require("rust-tools").hover_range.hover_range()
+        -- end)
       end,
       capabilities = capabilities,
       standalone = true,
       -- flags = { debounce_text_changes = 150 },
       settings = {
         ["rust-analyzer"] = {
+          -- HACK: https://github.com/simrat39/rust-tools.nvim/issues/300
+          inlayHints = { locationLinks = false },
           checkOnSave = { command = "clippy" },
           cargo = { allFeatures = true },
         },
       },
+    },
+  }
+
+  require("flutter-tools").setup {
+    -- experimental = { lsp_derive = true },
+    -- debugger = { enabled = true },
+    -- widget_guides = { enabled = true },
+    -- closing_tags = { highlight = "ErrorMsg", prefix = ">", enabled = true },
+    -- dev_log = { open_cmd = "tabedit" },
+    -- outline = {
+    --   open_cmd = "30vnew",
+    -- },
+    lsp = {
+      on_attach = on_attach_with_format,
+      capabilities = capabilities,
     },
   }
 
@@ -126,6 +149,7 @@ return function()
     settings = {
       texlab = {
         auxDirectory = ".",
+        rootDirectory = ".",
         bibtexFormatter = "texlab",
         build = {
           -- args = { "-pdf", "-pdflatex=xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },

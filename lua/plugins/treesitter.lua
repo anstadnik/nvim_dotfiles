@@ -75,11 +75,11 @@ return {
           enable = true,
           disable = { "python" },
         },
-        -- rainbow = {
-        --   enable = true,
-        --   extended_mode = true,
-        --   max_file_lines = nil,
-        -- },
+        rainbow = {
+          enable = true,
+          extended_mode = true,
+          max_file_lines = nil,
+        },
       }
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -87,5 +87,5 @@ return {
     end,
   },
   "nvim-treesitter/nvim-treesitter-textobjects",
-  -- "p00f/nvim-ts-rainbow",
+  "mrjones2014/nvim-ts-rainbow",
 }
