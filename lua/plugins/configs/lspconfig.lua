@@ -140,6 +140,17 @@ return function()
     },
   }
 
+  local forward_search_mac = {
+    executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+    args = { "-g", "%l", "%p", "%f" },
+  }
+  local forward_search_linux = {
+    executable = "zathura",
+    args = { "--synctex-forward", "%l:1:%f", "%p" },
+  }
+  local is_mac = vim.loop.os_uname().sysname == "Darwin"
+  local forwardSearch = (forward_search_mac and is_mac) or forward_search_linux
+
   lspconfig["texlab"].setup {
     -- server = {
     on_attach = on_attach_with_format,
@@ -149,7 +160,7 @@ return function()
     settings = {
       texlab = {
         auxDirectory = ".",
-        rootDirectory = ".",
+        -- rootDirectory = ".",
         bibtexFormatter = "texlab",
         build = {
           -- args = { "-pdf", "-pdflatex=xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
@@ -168,10 +179,7 @@ return function()
         },
         diagnosticsDelay = 300,
         formatterLineLength = 80,
-        forwardSearch = {
-          executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
-          args = { "-g", "%l", "%p", "%f" },
-        },
+        forwardSearch = forwardSearch,
         chktex = { onOpenAndSave = true, onEdit = false },
         latexFormatter = "latexindent",
         latexindent = {
