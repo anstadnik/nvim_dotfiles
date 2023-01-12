@@ -4,7 +4,7 @@ return {
     dependencies = {
       "Saecki/crates.nvim",
       "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
+      "L3MON4D3/LuaSnip",
       "phaazon/mind.nvim",
       "akinsho/flutter-tools.nvim",
     },
