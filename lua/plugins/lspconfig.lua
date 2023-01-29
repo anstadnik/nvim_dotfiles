@@ -1,7 +1,11 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "simrat39/symbols-outline.nvim", "williamboman/mason-lspconfig.nvim" },
+    dependencies = {
+      "simrat39/symbols-outline.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    },
     config = require "plugins.configs.lspconfig",
   },
   {

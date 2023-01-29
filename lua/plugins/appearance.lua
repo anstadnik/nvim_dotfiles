@@ -29,11 +29,11 @@ return {
         update_interval = 1000,
         set_dark_mode = function()
           vim.api.nvim_set_option("background", "dark")
-          vim.fn.system { "kitty", "+kitten", "themes", "Onenord Dark" }
+          vim.fn.system { "kitty", "+kitten", "themes", "onenord" }
         end,
         set_light_mode = function()
           vim.api.nvim_set_option("background", "light")
-          vim.fn.system { "kitty", "+kitten", "themes", "Onenord Light" }
+          vim.fn.system { "kitty", "+kitten", "themes", "onenord light" }
         end,
       }
       auto_dark_mode.init()
@@ -106,4 +106,14 @@ return {
       }
     end,
   },
+  {
+    "KeitaNakamura/tex-conceal.vim",
+    filetypes = { "tex" },
+  },
+  -- {
+  --   "luukvbaal/statuscol.nvim",
+  --   config = function()
+  --     require("statuscol").setup({setopt = true})
+  --   end,
+  -- },
 }

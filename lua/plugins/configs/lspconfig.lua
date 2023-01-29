@@ -149,7 +149,8 @@ return function()
     args = { "--synctex-forward", "%l:1:%f", "%p" },
   }
   local is_mac = vim.loop.os_uname().sysname == "Darwin"
-  local forwardSearch = (forward_search_mac and is_mac) or forward_search_linux
+  local forwardSearch = is_mac and forward_search_mac or forward_search_linux
+  print(vim.inspect(forwardSearch))
 
   lspconfig["texlab"].setup {
     -- server = {
@@ -160,7 +161,7 @@ return function()
     settings = {
       texlab = {
         auxDirectory = ".",
-        -- rootDirectory = ".",
+        rootDirectory = ".",
         bibtexFormatter = "texlab",
         build = {
           -- args = { "-pdf", "-pdflatex=xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
