@@ -62,6 +62,7 @@ return {
   },
   {
     "pwntester/octo.nvim",
+    cmd = "Octo",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",

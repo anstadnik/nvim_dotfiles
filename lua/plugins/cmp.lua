@@ -2,6 +2,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     config = require "plugins.configs.cmp",
+    event = "InsertEnter",
     dependencies = {
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-nvim-lua",
@@ -10,14 +11,12 @@ return {
       "hrsh7th/cmp-path",
       "tzachar/cmp-tabnine",
       "petertriho/cmp-git",
+      "saadparwaiz1/cmp_luasnip",
     },
   },
   {
     "L3MON4D3/LuaSnip",
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-      "nvim-lua/plenary.nvim",
-    },
+    lazy = true,
     config = function()
       require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/luasnippets" }
       require("luasnip").config.setup {
@@ -52,6 +51,7 @@ return {
   },
   {
     "saadparwaiz1/cmp_luasnip",
+    lazy = true,
     dependencies = { "L3MON4D3/LuaSnip" },
   },
 
@@ -59,6 +59,7 @@ return {
   { "tzachar/cmp-tabnine", build = "./install.sh" },
   {
     "petertriho/cmp-git",
+    lazy = true,
     config = function()
       require("cmp_git").setup()
     end,
