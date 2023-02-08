@@ -86,6 +86,4 @@ return {
       vim.opt.foldenable = false
     end,
   },
-  "nvim-treesitter/nvim-treesitter-textobjects",
-  "mrjones2014/nvim-ts-rainbow",
 }

@@ -1,6 +1,11 @@
 return {
   {
     "nvim-tree/nvim-tree.lua",
+    dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    "jose-elias-alvarez/null-ls.nvim",
+
+    },
     config = function()
       local function open_nvim_tree(data)
         -- buffer is a [No Name]

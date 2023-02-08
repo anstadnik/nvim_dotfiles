@@ -13,7 +13,7 @@ return {
   },
   -- {
   --   "rmehri01/onenord.nvim",
-  --   dependencies = "f-person/auto-dark-mode.nvim",
+  --   depended = "f-person/auto-dark-mode.nvim",
   --   lazy = false, -- make sure we load this during startup if it is your main colorscheme
   --   priority = 1000, -- make sure to load this before all the other start plugins
   --   config = function()
@@ -34,6 +34,7 @@ return {
     enabled = function()
       return vim.fn.has "macunix"
     end,
+    depencies = { "catppuccin/nvim" },
     config = function()
       local auto_dark_mode = require "auto-dark-mode"
 
@@ -53,6 +54,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup {
         theme = "catppuccin",
@@ -86,20 +88,11 @@ return {
     end,
   },
   {
-    "rcarriga/nvim-notify",
-    dependencies = {
-      "folke/noice.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
-  {
-    "MunifTanjim/nui.nvim",
-    dependencies = {
-      "folke/noice.nvim",
-    },
-  },
-  {
     "folke/noice.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
     config = function()
       -- require("notify").setup {
       --   background_colour = "#000000",

@@ -3,7 +3,7 @@ return {
     "hrsh7th/nvim-cmp",
     config = require "plugins.configs.cmp",
     dependencies = {
-      "L3MON4D3/LuaSnip",
+      "onsails/lspkind.nvim",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
@@ -14,7 +14,10 @@ return {
   },
   {
     "L3MON4D3/LuaSnip",
-    dependencies = { "saadparwaiz1/cmp_luasnip" },
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+      "nvim-lua/plenary.nvim",
+    },
     config = function()
       require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/luasnippets" }
       require("luasnip").config.setup {
@@ -47,12 +50,10 @@ return {
       })
     end,
   },
-
-  "saadparwaiz1/cmp_luasnip",
-  "hrsh7th/cmp-nvim-lua",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
+  {
+    "saadparwaiz1/cmp_luasnip",
+    dependencies = { "L3MON4D3/LuaSnip" },
+  },
 
   -- misc plugins
   { "tzachar/cmp-tabnine", build = "./install.sh" },
@@ -64,9 +65,6 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    dependencies = {
-      "zbirenbaum/copilot-cmp",
-    },
     config = function()
       vim.schedule(function()
         -- require("copilot").setup {}
@@ -89,6 +87,10 @@ return {
   },
   {
     "zbirenbaum/copilot-cmp",
+    dependencies = {
+      "zbirenbaum/copilot.lua",
+      "onsails/lspkind.nvim",
+    },
     config = function()
       require("copilot_cmp").setup()
 
@@ -102,5 +104,4 @@ return {
       vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
     end,
   },
-  { "onsails/lspkind.nvim", dependencies = "zbirenbaum/copilot-cmp" },
 }

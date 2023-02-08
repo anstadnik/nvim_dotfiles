@@ -2,10 +2,9 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      "nvim-telescope/telescope-ui-select.nvim",
+      "nvim-lua/plenary.nvim",
       "debugloop/telescope-undo.nvim",
-      "nvim-telescope/telescope-bibtex.nvim",
-      "pwntester/octo.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
       vim.keymap.set("n", "<leader>n", "<cmd> Telescope find_files <CR>")
@@ -44,6 +43,10 @@ return {
       require("telescope").load_extension "undo"
     end,
   },
-  -- "nvim-telescope/telescope-ui-select.nvim",
-  -- "debugloop/telescope-undo.nvim",
+  {
+    "nvim-telescope/telescope-bibtex.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+  },
 }
