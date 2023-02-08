@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    dependencies = { "folke/neodev.nvim" },
     config = require "plugins.configs.lspconfig",
   },
   {
@@ -9,10 +10,6 @@ return {
     config = function()
       require("symbols-outline").setup()
     end,
-  },
-  {
-    "williamboman/mason.nvim",
-    dependencies = { "williamboman/mason-lspconfig.nvim" },
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -79,6 +76,12 @@ return {
           require("null-ls").builtins.formatting.beautysh,
         },
       }
+    end,
+  },
+  {
+    "folke/neodev.nvim",
+    config = function()
+      require("neodev").setup {}
     end,
   },
 }
