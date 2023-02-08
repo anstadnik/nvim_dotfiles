@@ -5,7 +5,7 @@ return {
       "simrat39/symbols-outline.nvim",
       "williamboman/mason-lspconfig.nvim",
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-      "SmiteshP/nvim-navic",
+      -- "SmiteshP/nvim-navic",
     },
     config = require "plugins.configs.lspconfig",
   },
@@ -55,6 +55,13 @@ return {
       require("nvim-navic").setup {
         highlight = true,
       }
+    end,
+  },
+  {
+    "folke/neodev.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require("neodev").setup {}
     end,
   },
 }

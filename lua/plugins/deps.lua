@@ -8,7 +8,7 @@ return {
       "L3MON4D3/LuaSnip",
       "phaazon/mind.nvim",
       "akinsho/flutter-tools.nvim",
-  "folke/todo-comments.nvim",
+      "folke/todo-comments.nvim",
     },
   },
   {
