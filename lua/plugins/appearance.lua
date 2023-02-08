@@ -1,22 +1,34 @@
 return {
   {
-    "rmehri01/onenord.nvim",
-    dependencies = "f-person/auto-dark-mode.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    "catppuccin/nvim",
+    name = "catppuccin",
     config = function()
-      require("onenord").setup {
-        styles = {
-          comments = "italic",
-          keywords = "none",
-          functions = "bold",
-          strings = "none",
-          variables = "none",
-        },
-        disable = { background = true },
+      require("catppuccin").setup {
+        native_lsp = { enabled = true },
+        navic = { enabled = false },
       }
+      vim.cmd.colorscheme "catppuccin"
+      vim.opt.background = "light"
     end,
   },
+  -- {
+  --   "rmehri01/onenord.nvim",
+  --   dependencies = "f-person/auto-dark-mode.nvim",
+  --   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   config = function()
+  --     require("onenord").setup {
+  --       styles = {
+  --         comments = "italic",
+  --         keywords = "none",
+  --         functions = "bold",
+  --         strings = "none",
+  --         variables = "none",
+  --       },
+  --       disable = { background = true },
+  --     }
+  --   end,
+  -- },
   {
     "f-person/auto-dark-mode.nvim",
     enabled = function()
@@ -29,11 +41,11 @@ return {
         update_interval = 1000,
         set_dark_mode = function()
           vim.api.nvim_set_option("background", "dark")
-          vim.fn.system { "kitty", "+kitten", "themes", "onenord" }
+          vim.fn.system { "kitty", "+kitten", "themes", "Catppuccin-Mocha" }
         end,
         set_light_mode = function()
           vim.api.nvim_set_option("background", "light")
-          vim.fn.system { "kitty", "+kitten", "themes", "onenord light" }
+          vim.fn.system { "kitty", "+kitten", "themes", "Catppuccin-Latte" }
         end,
       }
       auto_dark_mode.init()
@@ -43,12 +55,19 @@ return {
     "nvim-lualine/lualine.nvim",
     config = function()
       require("lualine").setup {
-        theme = "onenord",
+        theme = "catppuccin",
         options = {
           component_separators = "",
           section_separators = { left = "", right = "" },
         },
         sections = {
+          lualine_c = {
+            "filename",
+            {
+              require("nvim-navic").get_location,
+              cond = require("nvim-navic").is_available,
+            },
+          },
           lualine_x = {
             {
               require("lazy.status").updates,

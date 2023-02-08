@@ -35,6 +35,5 @@ vim.opt.shiftwidth = 2
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.undofile = true
-vim.opt.background = "light"
 vim.opt.diffopt:append { 'vertical' }
 -- vim.opt.foldlevelstart=99

@@ -38,16 +38,25 @@ return function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { buffer = bufnr })
   end
+
   local on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
     load_mapping(bufnr)
+
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, bufnr)
+    end
   end
 
   local on_attach_with_format = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
     load_mapping(bufnr)
+
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, bufnr)
+    end
   end
 
   local capabilities = require("cmp_nvim_lsp").default_capabilities()

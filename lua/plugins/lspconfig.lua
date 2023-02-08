@@ -5,6 +5,7 @@ return {
       "simrat39/symbols-outline.nvim",
       "williamboman/mason-lspconfig.nvim",
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      "SmiteshP/nvim-navic",
     },
     config = require "plugins.configs.lspconfig",
   },
@@ -47,5 +48,13 @@ return {
       require("trouble").setup {}
     end,
   },
-  { "akinsho/flutter-tools.nvim" },
+  "akinsho/flutter-tools.nvim",
+  {
+    "SmiteshP/nvim-navic",
+    config = function()
+      require("nvim-navic").setup {
+        highlight = true,
+      }
+    end,
+  },
 }
