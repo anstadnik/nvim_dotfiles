@@ -2,6 +2,7 @@ return {
   {
     "nvim-lua/plenary.nvim",
     dependencies = {
+      "pwntester/octo.nvim",
       "Saecki/crates.nvim",
       "nvim-telescope/telescope.nvim",
       "L3MON4D3/LuaSnip",
@@ -12,6 +13,7 @@ return {
   {
     "nvim-tree/nvim-web-devicons",
     dependencies = {
+      "pwntester/octo.nvim",
       "nvim-tree/nvim-tree.lua",
       "nvim-lualine/lualine.nvim",
     },
