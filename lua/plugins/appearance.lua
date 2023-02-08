@@ -85,13 +85,13 @@ return {
       require("tabby.tabline").use_preset("active_tab_with_wins", {})
     end,
   },
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   dependencies = {
-  --     "folke/noice.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  -- },
+  {
+    "rcarriga/nvim-notify",
+    dependencies = {
+      "folke/noice.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
   {
     "MunifTanjim/nui.nvim",
     dependencies = {
