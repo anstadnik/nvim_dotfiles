@@ -200,7 +200,7 @@ autosnips = {
     -- { condition = tex.in_mathzone }
   ),
   s(
-    { trig = "^^", name = "supscript", wordTrig = false, hidden = true },
+    { trig = "td", name = "supscript", wordTrig = false, hidden = true },
     { t "^{", i(1), t "}" },
     {}
     -- { condition = tex.in_mathzone }

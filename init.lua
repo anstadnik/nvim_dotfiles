@@ -21,3 +21,4 @@ require("lazy").setup("plugins", {
 })
 
 require "mappings"
+require "autocmds"

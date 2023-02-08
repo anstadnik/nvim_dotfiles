@@ -150,7 +150,6 @@ return function()
   }
   local is_mac = vim.loop.os_uname().sysname == "Darwin"
   local forwardSearch = is_mac and forward_search_mac or forward_search_linux
-  print(vim.inspect(forwardSearch))
 
   lspconfig["texlab"].setup {
     -- server = {
