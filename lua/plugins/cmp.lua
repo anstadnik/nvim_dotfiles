@@ -2,7 +2,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     config = require "plugins.configs.cmp",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     dependencies = {
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-nvim-lua",

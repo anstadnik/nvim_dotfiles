@@ -197,7 +197,7 @@ return function()
       },
     },
   }
-  lspconfig.sumneko_lua.setup {
+  lspconfig.lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 
