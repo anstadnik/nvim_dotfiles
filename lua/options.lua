@@ -17,8 +17,10 @@ opt.gdefault = true
 
 opt.number = true
 opt.relativenumber = true
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.wo.foldmethod = "expr"
+-- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.foldcolumn = "1"
 
 opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "

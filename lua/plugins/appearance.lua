@@ -128,4 +128,32 @@ return {
   --     require("statuscol").setup({setopt = true})
   --   end,
   -- },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = {
+      "kevinhwang91/promise-async",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+      vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+      vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
+      vim.keymap.set("n", "zm", require("ufo").closeFoldsWith)
+
+      require("ufo").setup()
+    end,
+  },
+  {
+    "luukvbaal/statuscol.nvim",
+    enabled = function()
+      return vim.fn.has "nvim-0.9" == 1
+    end,
+    config = function()
+      require("statuscol").setup {
+        foldfunc = "builtin",
+        setopt = true,
+      }
+    end,
+  },
 }
