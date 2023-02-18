@@ -64,28 +64,28 @@ return {
       require("cmp_git").setup()
     end,
   },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   config = function()
-  --     vim.schedule(function()
-  --       -- require("copilot").setup {}
-  --       require("copilot").setup {
-  --         suggestion = { auto_trigger = true },
-  --         filetypes = {
-  --           yaml = false,
-  --           markdown = true,
-  --           help = false,
-  --           gitcommit = false,
-  --           gitrebase = false,
-  --           hgcommit = false,
-  --           svn = false,
-  --           cvs = false,
-  --           ["."] = false,
-  --         },
-  --       }
-  --     end)
-  --   end,
-  -- },
+  {
+    "zbirenbaum/copilot.lua",
+    config = function()
+      vim.schedule(function()
+        -- require("copilot").setup {}
+        require("copilot").setup {
+          suggestion = { auto_trigger = true },
+          filetypes = {
+            yaml = false,
+            markdown = true,
+            help = false,
+            gitcommit = false,
+            gitrebase = false,
+            hgcommit = false,
+            svn = false,
+            cvs = false,
+            ["."] = false,
+          },
+        }
+      end)
+    end,
+  },
   {
     "zbirenbaum/copilot-cmp",
     dependencies = {

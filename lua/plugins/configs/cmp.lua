@@ -9,13 +9,13 @@ return function()
     mapping = {
       ["<C-p>"] = cmp.mapping.select_prev_item(),
       ["<C-n>"] = cmp.mapping.select_next_item(),
-      -- ["<C-f>"] = cmp.mapping(function(fallback)
-      --   if require("copilot.suggestion").is_visible() then
-      --     require("copilot.suggestion").accept()
-      --   else
-      --     fallback()
-      --   end
-      -- end),
+      ["<C-f>"] = cmp.mapping(function(fallback)
+        if require("copilot.suggestion").is_visible() then
+          require("copilot.suggestion").accept()
+        else
+          fallback()
+        end
+      end),
       ["<C-Space>"] = {
         i = function()
           if cmp.visible() then
