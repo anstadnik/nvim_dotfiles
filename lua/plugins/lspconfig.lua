@@ -84,4 +84,8 @@ return {
       require("neodev").setup {}
     end,
   },
+  {
+    "znck/grammarly",
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
 }

@@ -156,4 +156,23 @@ return {
       }
     end,
   },
+  {
+    "Pocco81/true-zen.nvim",
+    dependencies = {
+      "folke/twilight.nvim"
+    },
+    config = function()
+      require("true-zen").setup {
+        integrations = {
+          tmux = true, -- hide tmux status bar in (minimalist, ataraxis)
+          kitty = { -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)
+            enabled = true,
+            font = "+3",
+          },
+          twilight = true, -- enable twilight (ataraxis)
+          lualine = true, -- hide nvim-lualine (ataraxis)
+        },
+      }
+    end,
+  },
 }
