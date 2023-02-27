@@ -20,10 +20,10 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = augroup "lazy_autoupdate",
-  callback = function()
-    require("lazy").update { show = false }
-    require("nvim-treesitter.install").update()
-  end,
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   group = augroup "lazy_autoupdate",
+--   callback = function()
+--     require("lazy").update { show = false }
+--     require("nvim-treesitter.install").update()
+--   end,
+-- })
