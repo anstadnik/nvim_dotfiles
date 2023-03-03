@@ -5,7 +5,7 @@ return {
     config = function()
       require("catppuccin").setup {
         native_lsp = { enabled = true },
-        navic = { enabled = false },
+        -- navic = { enabled = false },
       }
       vim.cmd.colorscheme "catppuccin"
       vim.opt.background = "light"
@@ -65,10 +65,10 @@ return {
         sections = {
           lualine_c = {
             "filename",
-            {
-              require("nvim-navic").get_location,
-              cond = require("nvim-navic").is_available,
-            },
+            -- {
+            --   require("nvim-navic").get_location,
+            --   cond = require("nvim-navic").is_available,
+            -- },
           },
           lualine_x = {
             {
@@ -81,10 +81,27 @@ return {
       }
     end,
   },
+  -- {
+  --   "nanozuki/tabby.nvim",
+  --   config = function()
+  --     require("tabby.tabline").use_preset("active_tab_with_wins", {})
+  --   end,
+  -- },
   {
-    "nanozuki/tabby.nvim",
+    "akinsho/bufferline.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "catppuccin",
+    },
     config = function()
-      require("tabby.tabline").use_preset("active_tab_with_wins", {})
+      require("bufferline").setup {
+        options = {
+          mode = "tabs",
+          separator_style = "slope",
+          highlights = require("catppuccin.groups.integrations.bufferline").get(),
+          diagnostidcs = "nvim_lsp",
+        },
+      }
     end,
   },
   {
@@ -159,7 +176,7 @@ return {
   {
     "Pocco81/true-zen.nvim",
     dependencies = {
-      "folke/twilight.nvim"
+      "folke/twilight.nvim",
     },
     config = function()
       require("true-zen").setup {

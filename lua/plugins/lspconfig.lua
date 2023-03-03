@@ -53,15 +53,15 @@ return {
     "akinsho/flutter-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
-  {
-    "SmiteshP/nvim-navic",
-    dependencies = { "neovim/nvim-lspconfig" },
-    config = function()
-      require("nvim-navic").setup {
-        highlight = true,
-      }
-    end,
-  },
+  -- {
+  --   "SmiteshP/nvim-navic",
+  --   dependencies = { "neovim/nvim-lspconfig" },
+  --   config = function()
+  --     require("nvim-navic").setup {
+  --       highlight = true,
+  --     }
+  --   end,
+  -- },
   {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()

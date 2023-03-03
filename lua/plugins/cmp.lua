@@ -9,7 +9,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "tzachar/cmp-tabnine",
+      -- "tzachar/cmp-tabnine",
       "petertriho/cmp-git",
       "saadparwaiz1/cmp_luasnip",
     },
@@ -56,7 +56,7 @@ return {
   },
 
   -- misc plugins
-  { "tzachar/cmp-tabnine", build = "./install.sh" },
+  -- { "tzachar/cmp-tabnine", build = "./install.sh" },
   {
     "petertriho/cmp-git",
     lazy = true,
@@ -66,6 +66,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    enabled = false,
     config = function()
       vim.schedule(function()
         -- require("copilot").setup {}
@@ -88,6 +89,7 @@ return {
   },
   {
     "zbirenbaum/copilot-cmp",
+    enabled = false,
     dependencies = {
       "zbirenbaum/copilot.lua",
       "onsails/lspkind.nvim",
