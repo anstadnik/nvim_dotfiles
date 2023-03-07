@@ -66,7 +66,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = false,
+    -- enabled = false,
     config = function()
       vim.schedule(function()
         -- require("copilot").setup {}
