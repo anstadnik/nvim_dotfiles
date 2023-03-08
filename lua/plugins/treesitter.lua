@@ -3,9 +3,17 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "mrjones2014/nvim-ts-rainbow",
+      -- "mrjones2014/nvim-ts-rainbow",
+      "HiPhish/nvim-ts-rainbow2",
     },
     config = function()
+      -- if vim.fn.has('nvim-0.9') then
+      -- vim.treesitter.language.register("python", "sage")
+      -- else
+      local ft_to_parser = require("nvim-treesitter.parsers").filetype_to_parsername
+      ft_to_parser.sage = "python"
+      -- end
+
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
           "rust",
@@ -20,6 +28,9 @@ return {
           "markdown_inline",
           "julia",
           "cpp",
+        },
+        highlight = {
+          enable = true,
         },
         textobjects = {
           select = {

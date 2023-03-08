@@ -34,7 +34,7 @@ return {
     enabled = function()
       return vim.fn.has "macunix"
     end,
-    depencies = { "catppuccin/nvim" },
+    dependencies = { "catppuccin/nvim" },
     config = function()
       local auto_dark_mode = require "auto-dark-mode"
 
@@ -137,7 +137,7 @@ return {
   },
   {
     "KeitaNakamura/tex-conceal.vim",
-    filetypes = { "tex" },
+    ft = { "tex" },
   },
   -- {
   --   "luukvbaal/statuscol.nvim",
