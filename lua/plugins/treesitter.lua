@@ -4,6 +4,7 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       -- "mrjones2014/nvim-ts-rainbow",
+      "RRethy/nvim-treesitter-textsubjects",
       "HiPhish/nvim-ts-rainbow2",
     },
     config = function()
@@ -90,6 +91,15 @@ return {
           enable = true,
           extended_mode = true,
           max_file_lines = nil,
+        },
+        textsubjects = {
+          enable = true,
+          prev_selection = ",", -- (Optional) keymap to select the previous selection
+          keymaps = {
+            ["."] = "textsubjects-smart",
+            [":"] = "textsubjects-container-outer",
+            ["i:"] = "textsubjects-container-inner",
+          },
         },
       }
       vim.opt.foldmethod = "expr"

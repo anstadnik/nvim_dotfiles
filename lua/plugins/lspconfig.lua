@@ -66,8 +66,15 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("null-ls").setup {
+        on_attach = function(client, bufnr)
+          vim.keymap.set("n", "<leader>fm", function()
+            vim.lsp.buf.format { async = true }
+          end, { buffer = bufnr })
+        end,
         sources = {
-          require("null-ls").builtins.formatting.black,
+          require("null-ls").builtins.formatting.black.with {
+            filetypes = { "python", "sage" },
+          },
           require("null-ls").builtins.formatting.isort,
           require("null-ls").builtins.formatting.ruff,
           require("null-ls").builtins.diagnostics.ruff,
