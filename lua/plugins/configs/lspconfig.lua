@@ -108,7 +108,7 @@ return function()
         on_attach_with_format(client, bufnr)
         vim.keymap.set("n", "K", function()
           require("rust-tools").hover_actions.hover_actions()
-        end)
+        end, { buffer = bufnr })
         -- vim.keymap.set("x", "K", function()
         --   require("rust-tools").hover_range.hover_range()
         -- end)
@@ -123,6 +123,16 @@ return function()
           checkOnSave = { command = "clippy" },
           cargo = { allFeatures = true },
         },
+      },
+    },
+    dap = {
+      adapter = {
+        type = "executable",
+        command = (
+          vim.fn.executable "lldb-vscode" == 1 and "lldb-vscode"
+          or "/opt/homebrew/Cellar/llvm/16.0.0/bin/lldb-vscode"
+        ),
+        name = "rt_lldb",
       },
     },
   }
