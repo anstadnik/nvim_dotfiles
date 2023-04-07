@@ -60,7 +60,8 @@ return {
         theme = "catppuccin",
         options = {
           component_separators = "",
-          section_separators = { left = "", right = "" },
+          -- section_separators = { left = "", right = "" },
+          section_separators = { left = "█", right = "█" },
         },
         sections = {
           lualine_c = {
@@ -97,7 +98,7 @@ return {
       require("bufferline").setup {
         options = {
           mode = "tabs",
-          separator_style = "slope",
+          separator_style = "thick",
           highlights = require("catppuccin.groups.integrations.bufferline").get(),
           diagnostidcs = "nvim_lsp",
         },
