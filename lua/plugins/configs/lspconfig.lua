@@ -37,6 +37,8 @@ return function()
     vim.keymap.set("n", "<leader>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { buffer = bufnr })
+
+    -- vim.keymap.set("n", "<C-f>", require("copilot.suggestion").accept, { buffer = bufnr })
   end
 
   local on_attach = function(client, bufnr)
@@ -59,8 +61,14 @@ return function()
     -- end
   end
 
-  local capabilities = require("cmp_nvim_lsp").default_capabilities()
+  -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
   -- local capabilities = require("plugins.configs.lspconfig").capabilities
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
 
   local lspconfig = require "lspconfig"
 

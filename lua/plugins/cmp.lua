@@ -68,23 +68,33 @@ return {
     "zbirenbaum/copilot.lua",
     -- enabled = false,
     config = function()
-      vim.schedule(function()
-        -- require("copilot").setup {}
-        require("copilot").setup {
-          suggestion = { auto_trigger = true },
-          filetypes = {
-            yaml = false,
-            markdown = true,
-            help = false,
-            gitcommit = false,
-            gitrebase = false,
-            hgcommit = false,
-            svn = false,
-            cvs = false,
-            ["."] = false,
-          },
-        }
-      end)
+      -- vim.schedule(function()
+      require("copilot").setup {
+        suggestion = {
+          auto_trigger = true,
+          keymap = { accept = "<C-f>" },
+        },
+        filetypes = {
+          yaml = false,
+          markdown = true,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+      }
+      -- end)
+      -- ["<C-f>"] = cmp.mapping(function(fallback)
+      --   if require("copilot.suggestion").is_visible() then
+      --     require("copilot.suggestion").accept()
+      --   else
+      --     fallback()
+      --   end
+      -- end),
+      -- vim.keymap.set("n", "<C-f>", require("copilot.suggestion").accept)
     end,
   },
   {

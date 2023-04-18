@@ -140,12 +140,6 @@ return {
     "KeitaNakamura/tex-conceal.vim",
     ft = { "tex" },
   },
-  -- {
-  --   "luukvbaal/statuscol.nvim",
-  --   config = function()
-  --     require("statuscol").setup({setopt = true})
-  --   end,
-  -- },
   {
     "kevinhwang91/nvim-ufo",
     dependencies = {
@@ -164,13 +158,16 @@ return {
   },
   {
     "luukvbaal/statuscol.nvim",
-    enabled = function()
-      return vim.fn.has "nvim-0.9" == 1
-    end,
     config = function()
+      local builtin = require "statuscol.builtin"
       require("statuscol").setup {
-        foldfunc = "builtin",
-        setopt = true,
+        relculright = true,
+        segments = {
+          { text = { builtin.foldfunc } },
+          { sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true } },
+          { text = { builtin.lnumfunc } },
+          { sign = { name = { ".*" }, maxwidth = 2, colwidth = 1 } },
+        },
       }
     end,
   },

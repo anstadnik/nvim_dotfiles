@@ -7,6 +7,10 @@ return {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("gitsigns").setup {
+        signcolumn = false,
+        numhl = true,
+        linehl = true,
+        word_diff = false,
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
 

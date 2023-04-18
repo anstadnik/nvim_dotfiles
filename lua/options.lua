@@ -3,7 +3,6 @@
 
 local opt = vim.opt
 
-
 opt.completeopt = "menu,menuone,noselect"
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
@@ -17,16 +16,16 @@ opt.gdefault = true
 
 opt.number = true
 opt.relativenumber = true
--- vim.wo.foldmethod = "expr"
--- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldcolumn = "1"
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
 opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
-opt.foldlevelstart = 99
 
 vim.diagnostic.config {
   virtual_text = false,
@@ -47,8 +46,7 @@ opt.shiftwidth = 2
 opt.incsearch = true
 opt.ignorecase = true
 opt.undofile = true
-opt.diffopt:append { 'vertical' }
--- vim.opt.foldlevelstart=99
+opt.diffopt:append { "vertical" }
 
 opt.inccommand = "nosplit" -- preview incremental substitute
 
@@ -82,7 +80,7 @@ opt.wrap = false -- Disable line wrap
 
 opt.list = false
 
-if vim.fn.has("nvim-0.9.0") == 1 then
+if vim.fn.has "nvim-0.9.0" == 1 then
   opt.splitkeep = "screen"
   opt.shortmess:append { C = true }
 end
