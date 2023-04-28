@@ -50,6 +50,10 @@ return {
     end,
   },
   {
+    "anufrievroman/vim-angry-reviewer",
+    ft =  "tex" ,
+  },
+  {
     "akinsho/flutter-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
@@ -91,8 +95,5 @@ return {
       require("neodev").setup {}
     end,
   },
-  {
-    "znck/grammarly",
-    dependencies = { "neovim/nvim-lspconfig" },
-  },
+  { "znck/grammarly", dependencies = { "neovim/nvim-lspconfig" } },
 }

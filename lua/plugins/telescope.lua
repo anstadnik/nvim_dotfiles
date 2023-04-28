@@ -5,6 +5,7 @@ return {
       "nvim-lua/plenary.nvim",
       "debugloop/telescope-undo.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
+      "aaronhallaert/advanced-git-search.nvim",
     },
     config = function()
       vim.keymap.set("n", "<leader>n", "<cmd> Telescope find_files <CR>")
@@ -19,6 +20,7 @@ return {
       vim.keymap.set("n", "<leader>cm", "<cmd> Telescope git_commits <CR>")
       vim.keymap.set("n", "<leader>gt", "<cmd> Telescope git_status <CR>")
       vim.keymap.set("n", "<leader>fu", "<cmd> Telescope undothemes <CR>")
+      vim.keymap.set("n", "g/", "<cmd> Telescope advanced_git_search show_custom_functions <CR>")
       require("telescope").setup {
         defaults = {
           mappings = {
@@ -41,12 +43,26 @@ return {
       }
       require("telescope").load_extension "ui-select"
       require("telescope").load_extension "undo"
+      require("telescope").load_extension "advanced_git_search"
     end,
   },
   {
     "nvim-telescope/telescope-bibtex.nvim",
     dependencies = {
       "nvim-telescope/telescope.nvim",
+    },
+  },
+  {
+    "aaronhallaert/advanced-git-search.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      -- to show diff splits and open commits in browser
+      "tpope/vim-fugitive",
+      -- to open commits in browser with fugitive
+      "tpope/vim-rhubarb",
+      -- OPTIONAL: to replace the diff from fugitive with diffview.nvim
+      -- (fugitive is still needed to open in browser)
+      "sindrets/diffview.nvim",
     },
   },
 }

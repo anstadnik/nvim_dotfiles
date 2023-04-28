@@ -12,7 +12,7 @@ return function()
     end, { buffer = bufnr })
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr })
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr })
-    vim.keymap.set("n", "<c-f>", function()
+    vim.keymap.set("n", "<C-f>", function()
       if not require("noice.lsp").scroll(4) then
         return "<c-f>"
       end

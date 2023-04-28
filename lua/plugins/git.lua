@@ -76,4 +76,8 @@ return {
       require("octo").setup()
     end,
   },
+  {
+    "sindrets/diffview.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
+  },
 }

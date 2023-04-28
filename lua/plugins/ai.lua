@@ -3,6 +3,7 @@ return {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
     config = function()
+      vim.g.codeium_no_map_tab = 0
       require("chatgpt").setup()
       vim.keymap.set({ "n", "v" }, "<leader>ce", function()
         require("chatgpt").edit_with_instructions()
