@@ -145,6 +145,20 @@ return function()
     },
   }
 
+  lspconfig.ccls.setup {
+      on_attach = on_attach_with_format,
+      capabilities = capabilities,
+    -- init_options = {
+    --   compilationDatabaseDirectory = "build",
+    --   index = {
+    --     threads = 0,
+    --   },
+    --   clang = {
+    --     excludeArgs = { "-frounding-math" },
+    --   },
+    -- },
+  }
+
   require("flutter-tools").setup {
     -- experimental = { lsp_derive = true },
     -- debugger = { enabled = true },
