@@ -73,14 +73,29 @@ return function()
   local lspconfig = require "lspconfig"
 
   -- lspservers with default config
-  local servers = { "pyright" }
+  -- local servers = { "pyright" }
 
-  for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }
-  end
+  local root_files = {
+    "pyproject.toml",
+    "setup.py",
+    "setup.cfg",
+    "requirements.txt",
+    "Pipfile",
+    "pyrightconfig.json",
+    "environment.yml",
+  }
+  lspconfig["pyright"].setup {
+    on_attach = on_attach,
+    root_dir = lspconfig.util.root_pattern(unpack(root_files)),
+    capabilities = capabilities,
+  }
+
+  -- for _, lsp in ipairs(servers) do
+  --   lspconfig[lsp].setup {
+  --     on_attach = on_attach,
+  --     capabilities = capabilities,
+  --   }
+  -- end
 
   lspconfig.grammarly.setup {
     filetypes = { "markdown", "tex" },

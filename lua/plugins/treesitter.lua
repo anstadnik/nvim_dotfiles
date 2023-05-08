@@ -8,12 +8,7 @@ return {
       "HiPhish/nvim-ts-rainbow2",
     },
     config = function()
-      -- if vim.fn.has('nvim-0.9') then
       vim.treesitter.language.register("python", "sage")
-      -- else
-      -- local ft_to_parser = require("nvim-treesitter.parsers").filetype_to_parsername
-      -- ft_to_parser.sage = "python"
-      -- end
 
       require("nvim-treesitter.configs").setup {
         ensure_installed = {

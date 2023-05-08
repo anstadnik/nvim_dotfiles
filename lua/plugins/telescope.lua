@@ -23,6 +23,15 @@ return {
       vim.keymap.set("n", "g/", "<cmd> Telescope advanced_git_search show_custom_functions <CR>")
       require("telescope").setup {
         defaults = {
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+          },
           mappings = {
             i = { ["<esc>"] = require("telescope.actions").close },
           },
