@@ -28,6 +28,9 @@ snips = {
   -- 	{ condition = tex.in_text }
   -- ),
 
+}
+
+autosnips = {
   s(
     { trig = "lr(", name = "left( right)", hidden = true },
     { t { "\\left( " }, i(1), t { "\\right)" } },
@@ -53,9 +56,6 @@ snips = {
     { t { "\\left[ " }, i(1), t { "\\right]" } },
     { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
   ),
-}
-
-autosnips = {
   s(
     { trig = "bpm", name = "pmatrix Environment", hidden = true },
     { t { "\\begin{pmatrix}", "\t" }, i(1), t { "", "\\end{pmatrix}" } },

@@ -19,6 +19,16 @@ snips = {
     { t "\\emph{", i(1), t "}" },
     { condition = tex.in_text, show_condition = tex.in_text }
   ),
+  s(
+    { trig = "bf", name = "bold", dscr = "Insert bold text." },
+    { t "\\mathbf{", i(1), t "}" },
+    { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
+  ),
+  s(
+    { trig = "it", name = "italic", dscr = "Insert italic math." },
+    { t "\\mathit{", i(1), t "}" },
+    { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
+  ),
 }
 
 autosnips = {

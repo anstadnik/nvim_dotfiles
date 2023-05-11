@@ -97,43 +97,39 @@ return {
   --     -- vim.keymap.set("n", "<C-f>", require("copilot.suggestion").accept)
   --   end,
   -- },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   enabled = false,
-  --   dependencies = {
-  --     "zbirenbaum/copilot.lua",
-  --     "onsails/lspkind.nvim",
-  --   },
-  --   config = function()
-  --     require("copilot_cmp").setup()
-  --
-  --     local lspkind = require "lspkind"
-  --     lspkind.init {
-  --       symbol_map = {
-  --         Copilot = "",
-  --       },
-  --     }
-  --
-  --     vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-  --   end,
-  -- },
   {
-    "Exafunction/codeium.vim",
+    "zbirenbaum/copilot-cmp",
+    -- enabled = false,
+    dependencies = {
+      "zbirenbaum/copilot.lua",
+      "onsails/lspkind.nvim",
+    },
     config = function()
-      vim.g.codeium_no_map_tab = 0
-      -- Change '<C-g>' here to any keycode you like.
-      vim.keymap.set("i", "<C-f>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true })
-      -- vim.keymap.set("i", "<c-;>", function()
-      --   return vim.fn["codeium#CycleCompletions"](1)
-      -- end, { expr = true })
-      -- vim.keymap.set("i", "<c-,>", function()
-      --   return vim.fn["codeium#CycleCompletions"](-1)
-      -- end, { expr = true })
-      -- vim.keymap.set("i", "<c-x>", function()
-      --   return vim.fn["codeium#Clear"]()
-      -- end, { expr = true })
+      require("copilot_cmp").setup()
+
+      local lspkind = require "lspkind"
+      lspkind.init { symbol_map = { Copilot = "" } }
+
+      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
     end,
   },
+  -- {
+  --   "Exafunction/codeium.vim",
+  --   config = function()
+  --     vim.g.codeium_no_map_tab = 0
+  --     -- Change '<C-g>' here to any keycode you like.
+  --     vim.keymap.set("i", "<C-f>", function()
+  --       return vim.fn["codeium#Accept"]()
+  --     end, { expr = true })
+  --     -- vim.keymap.set("i", "<c-;>", function()
+  --     --   return vim.fn["codeium#CycleCompletions"](1)
+  --     -- end, { expr = true })
+  --     -- vim.keymap.set("i", "<c-,>", function()
+  --     --   return vim.fn["codeium#CycleCompletions"](-1)
+  --     -- end, { expr = true })
+  --     -- vim.keymap.set("i", "<c-x>", function()
+  --     --   return vim.fn["codeium#Clear"]()
+  --     -- end, { expr = true })
+  --   end,
+  -- },
 }

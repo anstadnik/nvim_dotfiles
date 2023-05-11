@@ -38,7 +38,7 @@ return function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { buffer = bufnr })
 
-    -- vim.keymap.set("n", "<C-f>", require("copilot.suggestion").accept, { buffer = bufnr })
+    vim.keymap.set("n", "<C-f>", require("copilot.suggestion").accept, { buffer = bufnr })
   end
 
   local on_attach = function(client, bufnr)
