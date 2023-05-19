@@ -64,55 +64,55 @@ return {
       require("cmp_git").setup()
     end,
   },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   -- enabled = false,
-  --   config = function()
-  --     -- vim.schedule(function()
-  --     require("copilot").setup {
-  --       suggestion = {
-  --         auto_trigger = true,
-  --         keymap = { accept = "<C-f>" },
-  --       },
-  --       filetypes = {
-  --         yaml = false,
-  --         markdown = true,
-  --         help = false,
-  --         gitcommit = false,
-  --         gitrebase = false,
-  --         hgcommit = false,
-  --         svn = false,
-  --         cvs = false,
-  --         ["."] = false,
-  --       },
-  --     }
-  --     -- end)
-  --     -- ["<C-f>"] = cmp.mapping(function(fallback)
-  --     --   if require("copilot.suggestion").is_visible() then
-  --     --     require("copilot.suggestion").accept()
-  --     --   else
-  --     --     fallback()
-  --     --   end
-  --     -- end),
-  --     -- vim.keymap.set("n", "<C-f>", require("copilot.suggestion").accept)
-  --   end,
-  -- },
   {
-    "zbirenbaum/copilot-cmp",
+    "zbirenbaum/copilot.lua",
     -- enabled = false,
-    dependencies = {
-      "zbirenbaum/copilot.lua",
-      "onsails/lspkind.nvim",
-    },
     config = function()
-      require("copilot_cmp").setup()
-
-      local lspkind = require "lspkind"
-      lspkind.init { symbol_map = { Copilot = "" } }
-
-      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+      -- vim.schedule(function()
+      require("copilot").setup {
+        suggestion = {
+          auto_trigger = true,
+          keymap = { accept = "<C-f>" },
+        },
+        filetypes = {
+          yaml = false,
+          markdown = true,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+      }
+      -- end)
+      -- ["<C-f>"] = cmp.mapping(function(fallback)
+      --   if require("copilot.suggestion").is_visible() then
+      --     require("copilot.suggestion").accept()
+      --   else
+      --     fallback()
+      --   end
+      -- end),
+      -- vim.keymap.set("n", "<C-f>", require("copilot.suggestion").accept)
     end,
   },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   -- enabled = false,
+  --   dependencies = {
+  --     "zbirenbaum/copilot.lua",
+  --     "onsails/lspkind.nvim",
+  --   },
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --
+  --     local lspkind = require "lspkind"
+  --     lspkind.init { symbol_map = { Copilot = "" } }
+  --
+  --     vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+  --   end,
+  -- },
   -- {
   --   "Exafunction/codeium.vim",
   --   config = function()

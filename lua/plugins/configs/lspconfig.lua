@@ -89,6 +89,11 @@ return function()
     root_dir = lspconfig.util.root_pattern(unpack(root_files)),
     capabilities = capabilities,
   }
+  lspconfig["ruff_lsp"].setup {
+    on_attach = on_attach,
+    root_dir = lspconfig.util.root_pattern(unpack(root_files)),
+    capabilities = capabilities,
+  }
 
   -- for _, lsp in ipairs(servers) do
   --   lspconfig[lsp].setup {

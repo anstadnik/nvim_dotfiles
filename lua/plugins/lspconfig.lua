@@ -79,9 +79,8 @@ return {
           require("null-ls").builtins.formatting.black.with {
             filetypes = { "python", "sage" },
           },
-          require("null-ls").builtins.formatting.isort,
-          require("null-ls").builtins.formatting.ruff,
-          require("null-ls").builtins.diagnostics.ruff,
+          -- require("null-ls").builtins.formatting.ruff,
+          -- require("null-ls").builtins.diagnostics.ruff,
           require("null-ls").builtins.formatting.stylua,
           -- require("null-ls").builtins.formatting.shfmt,
           require("null-ls").builtins.formatting.beautysh,
