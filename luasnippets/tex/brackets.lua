@@ -38,7 +38,8 @@ autosnips = {
   ),
   s(
     { trig = "lr|", name = "leftvert rightvert", hidden = true },
-    { t { "\\left\\lvert " }, i(1), t { "\\right\\lvert" } },
+    -- { t { "\\left\\lvert " }, i(1), t { "\\right\\lvert" } },
+    { t { "\\left\\lVert " }, i(1), t { "\\right\\rVert" } },
     { condition = tex.in_mathzone, show_condition = tex.in_mathzone }
   ),
   s(
