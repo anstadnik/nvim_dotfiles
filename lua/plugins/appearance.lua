@@ -2,8 +2,8 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy=false,
-    priority=1000,
+    lazy = false,
+    priority = 1000,
     config = function()
       require("catppuccin").setup {}
       --   flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -218,6 +218,16 @@ return {
     },
     config = function()
       require("true-zen").setup {
+        modes = { -- configurations per mode
+          ataraxis = {
+            padding = { -- padding windows
+              left = 42,
+              right = 42,
+              top = 0,
+              bottom = 0,
+            },
+          },
+        },
         integrations = {
           tmux = true, -- hide tmux status bar in (minimalist, ataraxis)
           kitty = { -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)

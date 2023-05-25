@@ -1,5 +1,5 @@
--- local target_pane = "{bottom-left}"
-local target_pane = "debug:1.1"
+local target_pane = "{bottom-right}"
+-- local target_pane = "debug:1.1"
 
 vim.keymap.set("n", "<CR>", function()
   -- Find main.py in the current directory or parent directories

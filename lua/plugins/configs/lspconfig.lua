@@ -102,11 +102,11 @@ return function()
   --   }
   -- end
 
-  lspconfig.grammarly.setup {
-    filetypes = { "markdown", "tex" },
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+  -- lspconfig.grammarly.setup {
+  --   filetypes = { "markdown", "tex" },
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  -- }
 
   local servers_with_fmt = { "julials", "yamlls", "dockerls" }
 
@@ -125,12 +125,11 @@ return function()
 
   local rt = require "rust-tools"
   rt.setup {
-    -- HACK: https://github.com/simrat39/rust-tools.nvim/issues/300
-    -- tools = {
-    --   inlay_hints = {
-    --     auto = false,
-    --   },
-    -- },
+    tools = {
+      inlay_hints = {
+        auto = false,
+      },
+    },
     server = {
       on_attach = function(client, bufnr)
         on_attach_with_format(client, bufnr)
@@ -146,8 +145,6 @@ return function()
       -- flags = { debounce_text_changes = 150 },
       settings = {
         ["rust-analyzer"] = {
-          -- HACK: https://github.com/simrat39/rust-tools.nvim/issues/300
-          inlayHints = { locationLinks = false },
           checkOnSave = { command = "clippy" },
           cargo = { allFeatures = true },
         },
@@ -166,8 +163,8 @@ return function()
   }
 
   lspconfig.ccls.setup {
-      on_attach = on_attach_with_format,
-      capabilities = capabilities,
+    on_attach = on_attach_with_format,
+    capabilities = capabilities,
     -- init_options = {
     --   compilationDatabaseDirectory = "build",
     --   index = {
