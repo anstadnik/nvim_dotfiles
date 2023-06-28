@@ -79,14 +79,14 @@ autosnips = {
       show_condition = position.line_begin * tex.in_text,
     }
   ),
-  s(
-    { trig = "cor", name = "Corollary Environment", dscr = "Create a corollary environment." },
-    { t { "\\begin{corollary}", "\t" }, i(0), t { "", "\\end{corollary}" } },
-    {
-      condition = conds_expand.line_begin * tex.in_text,
-      show_condition = position.line_begin * tex.in_text,
-    }
-  ),
+  -- s(
+  --   { trig = "cor", name = "Corollary Environment", dscr = "Create a corollary environment." },
+  --   { t { "\\begin{corollary}", "\t" }, i(0), t { "", "\\end{corollary}" } },
+  --   {
+  --     condition = conds_expand.line_begin * tex.in_text,
+  --     show_condition = position.line_begin * tex.in_text,
+  --   }
+  -- ),
   s(
     { trig = "rem", name = "Remark Environment", dscr = "Create a remark environment." },
     { t { "\\begin{remark}", "\t" }, i(0), t { "", "\\end{remark}" } },

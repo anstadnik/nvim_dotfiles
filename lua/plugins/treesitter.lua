@@ -21,6 +21,7 @@ return {
           "vim",
           "regex",
           "markdown",
+          "dart",
           "markdown_inline",
           "julia",
           "cpp",

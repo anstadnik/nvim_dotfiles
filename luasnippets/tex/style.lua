@@ -42,11 +42,11 @@ autosnips = {
     { l("\\widehat{" .. l.POSTFIX_MATCH .. "}") },
     { condition = tex.in_mathzone }
   ),
-  -- postfix(
-  --   { trig = "td", name = "post widetilde", hidden = true },
-  --   { l("\\widetilde{" .. l.POSTFIX_MATCH .. "}") },
-  --   { condition = tex.in_mathzone }
-  -- ),
+  postfix(
+    { trig = "td", name = "post widetilde", hidden = true },
+    { l("\\widetilde{" .. l.POSTFIX_MATCH .. "}") },
+    { condition = tex.in_mathzone }
+  ),
 
   s({ trig = "quad", name = "quad", hidden = true }, { t "\\quad " }, { condition = tex.in_mathzone }),
   s(
