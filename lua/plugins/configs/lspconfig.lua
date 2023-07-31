@@ -102,11 +102,11 @@ return function()
   --   }
   -- end
 
-  -- lspconfig.grammarly.setup {
-  --   filetypes = { "markdown", "tex" },
-  --   on_attach = on_attach,
-  --   capabilities = capabilities,
-  -- }
+  lspconfig.grammarly.setup {
+    filetypes = { "markdown", "tex" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
 
   local servers_with_fmt = { "julials", "yamlls", "dockerls" }
 

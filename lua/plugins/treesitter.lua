@@ -5,7 +5,7 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
       -- "mrjones2014/nvim-ts-rainbow",
       "RRethy/nvim-treesitter-textsubjects",
-      "HiPhish/nvim-ts-rainbow2",
+      -- "HiPhish/nvim-ts-rainbow2",
     },
     config = function()
       vim.treesitter.language.register("python", "sage")
@@ -26,9 +26,9 @@ return {
           "julia",
           "cpp",
         },
-        -- highlight = {
-        --   enable = true,
-        -- },
+        highlight = {
+          enable = true,
+        },
         textobjects = {
           move = {
             enable = true,
@@ -88,12 +88,8 @@ return {
           },
           swap = {
             enable = true,
-            swap_next = {
-              ["<leader>a"] = "@parameter.inner",
-            },
-            swap_previous = {
-              ["<leader>A"] = "@parameter.inner",
-            },
+            swap_next = { ["<leader>a"] = "@parameter.inner" },
+            swap_previous = { ["<leader>A"] = "@parameter.inner" },
           },
         },
         incremental_selection = {
@@ -108,11 +104,6 @@ return {
         indent = {
           enable = true,
           disable = { "python", "dart" },
-        },
-        rainbow = {
-          enable = true,
-          extended_mode = true,
-          max_file_lines = nil,
         },
         textsubjects = {
           enable = true,
@@ -133,19 +124,6 @@ return {
     "cshuaimin/ssr.nvim",
     -- Calling setup is optional.
     config = function()
-      -- require("ssr").setup {
-      --   border = "rounded",
-      --   min_width = 50,
-      --   min_height = 5,
-      --   max_width = 120,
-      --   max_height = 25,
-      --   keymaps = {
-      --     close = "q",
-      --     next_match = "n",
-      --     prev_match = "N",
-      --     replace_confirm = "<cr>",
-      --     replace_all = "<leader><cr>",
-      --   },
       vim.keymap.set({ "n", "x" }, "<leader>sr", function()
         require("ssr").open()
       end)
@@ -201,18 +179,18 @@ return {
       -- Syntax Tree Surfer V2 Mappings
       -- Targeted Jump with virtual_text
       local sts = require "syntax-tree-surfer"
-      vim.keymap.set("n", "gv", function() -- only jump to variable_declarations
-        sts.targeted_jump { "variable_declaration" }
-      end, opts)
+      -- vim.keymap.set("n", "gv", function() -- only jump to variable_declarations
+      --   sts.targeted_jump { "variable_declaration" }
+      -- end, opts)
       vim.keymap.set("n", "gfu", function() -- only jump to functions
         sts.targeted_jump { "function", "arrrow_function", "function_definition" }
         --> In this example, the Lua language schema uses "function",
         --  when the Python language uses "function_definition"
         --  we include both, so this keymap will work on both languages
       end, opts)
-      vim.keymap.set("n", "gif", function() -- only jump to if_statements
-        sts.targeted_jump { "if_statement" }
-      end, opts)
+      -- vim.keymap.set("n", "gif", function() -- only jump to if_statements
+      --   sts.targeted_jump { "if_statement" }
+      -- end, opts)
       vim.keymap.set("n", "gfo", function() -- only jump to for_statements
         sts.targeted_jump { "for_statement" }
       end, opts)
@@ -300,6 +278,35 @@ return {
           ["function_definition"] = "",
           ["variable_declaration"] = "",
         },
+      }
+    end,
+  },
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    dependencies = "HiPhish/rainbow-delimiters.nvim",
+    config = function()
+      local rainbow_delimiters = require "rainbow-delimiters"
+      require "rainbow-delimiters.setup" {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+          commonlisp = rainbow_delimiters.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          latex = "rainbow-blocks",
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+        -- blacklist = {'c', 'cpp'},
+        -- extended_mode = true,
+        -- max_file_lines = nil,
       }
     end,
   },
